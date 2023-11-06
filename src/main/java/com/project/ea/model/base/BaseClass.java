@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public abstract class BaseClass {
-    private boolean isDeleted;
+    private boolean isDeleted = false;
 }
