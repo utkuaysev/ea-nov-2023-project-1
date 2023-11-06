@@ -18,7 +18,7 @@ public class EventController {
        return eventService.AddEvent(event);
     }
    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable long id) {
+   public void deleteById(@PathVariable long id) {
         eventService.deleteById(id);
     }
 
