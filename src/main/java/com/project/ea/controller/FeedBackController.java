@@ -1,6 +1,6 @@
-package com.project.ea.Controller;
+package com.project.ea.controller;
 
-import com.project.ea.Service.FeedbackService;
+import com.project.ea.service.FeedbackService;
 import com.project.ea.model.Feedback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

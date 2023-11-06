@@ -1,7 +1,6 @@
-package com.project.ea.Service;
+package com.project.ea.service;
 
-import com.project.ea.Repository.EventRepository;
-import com.project.ea.model.Alumni;
+import com.project.ea.repository.EventRepository;
 import com.project.ea.model.AlumniEvent;
 import com.project.ea.model.Event;
 import lombok.RequiredArgsConstructor;

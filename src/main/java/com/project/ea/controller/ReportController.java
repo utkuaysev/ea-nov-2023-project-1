@@ -1,12 +1,10 @@
-package com.project.ea.Controller;
+package com.project.ea.controller;
 
-import com.project.ea.Service.ReportService;
+import com.project.ea.service.ReportService;
 import com.project.ea.model.Report;
 import com.project.ea.model.type.ReportType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
