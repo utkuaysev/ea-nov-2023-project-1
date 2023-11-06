@@ -21,6 +21,10 @@ public class Alumni extends BaseClass {
     private String phone;
     private String profilePicture;
 
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     @OneToOne(mappedBy = "alumni", cascade = CascadeType.ALL)
     private EduExperience eduExperience;
 

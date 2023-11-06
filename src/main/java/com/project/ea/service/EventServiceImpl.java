@@ -15,7 +15,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public Event AddEvent(Event event) {
+    public Event addEvent(Event event) {
         if (event.getEventType() == null) {
             throw new IllegalArgumentException("Event type is required.");
         }

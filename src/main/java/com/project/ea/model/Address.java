@@ -12,23 +12,23 @@ import java.util.List;
 @Getter
 @Setter
 @Where(clause = "isDeleted = false")
-
-public class Company extends BaseClass {
+public class Address extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String industry;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToOne(mappedBy = "address")
+    private Company company;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<ProfExperience> profExperiences;
+    @OneToOne(mappedBy = "address")
+    private University university;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<OpenJob> openJobs;
+    @OneToOne(mappedBy = "address")
+    private Alumni alumni;
     // Constructors can be omitted because Lombok generates them
 }

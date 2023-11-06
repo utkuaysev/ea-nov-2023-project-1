@@ -1,4 +1,4 @@
-INSERT INTO report_type (id, name)
+INSERT INTO publication_type (id, name)
 VALUES
     (1, 'news'),
     (2, 'updates'),
@@ -18,10 +18,10 @@ VALUES
     (0, 'jane.smith@example.com', 'secret456', '987-654-3210', 'jane_smith.jpg');
 
 -- Insert data into the company table
-INSERT INTO alumni_portal.company (is_deleted, industry, location, name)
+INSERT INTO alumni_portal.company (is_deleted, industry, name)
 VALUES
-    (0, 'Technology', 'San Francisco', 'TechCorp Inc'),
-    (0, 'Finance', 'New York', 'FinanceX Ltd');
+    (0, 'Technology', 'TechCorp Inc'),
+    (0, 'Finance', 'FinanceX Ltd');
 
 -- Insert data into the event_type table
 INSERT INTO alumni_portal.event_type (name)
@@ -31,10 +31,10 @@ VALUES
     ('Workshop');
 
 -- Insert data into the event table
-INSERT INTO alumni_portal.event (is_deleted, event_type_id, start_date, end_date)
+INSERT INTO alumni_portal.event (is_deleted, event_type_id, description, start_date, end_date)
 VALUES
-    (0, 1, '2023-04-15 14:00:00', '2023-04-15 18:00:00'),
-    (0, 2, '2023-05-20 10:00:00', '2023-05-20 16:00:00');
+    (0, 1, 'e1', '2023-04-15 14:00:00', '2023-04-15 18:00:00'),
+    (0, 2, 'e2','2023-05-20 10:00:00', '2023-05-20 16:00:00');
 
 -- Insert data into the alumni_event table
 INSERT INTO alumni_portal.alumni_event (is_accepted, is_attended, is_deleted, alumni_id, event_id)
@@ -73,24 +73,17 @@ VALUES
     (0, 1, 1, '2022-01-15', '2023-03-30'),
     (0, 2, 2, '2021-11-20', '2023-05-10');
 
--- Insert data into the report_type table
-INSERT INTO alumni_portal.report_type (name)
+-- Insert data into the publication table
+INSERT INTO alumni_portal.publication (is_deleted, publication_type_id, description)
 VALUES
-    ('Bug Report'),
-    ('Feature Request'),
-    ('Feedback');
-
--- Insert data into the report table
-INSERT INTO alumni_portal.report (is_deleted, report_type_id, description)
-VALUES
-    (0, 1, 'Found a bug in the alumni portal'),
-    (0, 3, 'Suggestion for improving the event registration process');
+    (0, 1, 'news from maharishi'),
+    (0, 3, 'announcement for tm');
 
 -- Insert data into the university table
-INSERT INTO alumni_portal.university (is_deleted, location, name)
+INSERT INTO alumni_portal.university (is_deleted, name)
 VALUES
-    (0, 'New York', 'ABC University'),
-    (0, 'San Francisco', 'XYZ University');
+    (0, 'ABC University'),
+    (0, 'XYZ University');
 
 -- Insert data into the course table
 INSERT INTO alumni_portal.course (code, is_deleted, university_id, description, name)

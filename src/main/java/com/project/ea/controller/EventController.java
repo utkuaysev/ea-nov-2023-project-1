@@ -14,8 +14,8 @@ public class EventController {
     private final EventService eventService;
 
    @PostMapping
-    public Event AddEvent(@RequestBody Event event) {
-       return eventService.AddEvent(event);
+    public Event addEvent(@RequestBody Event event) {
+       return eventService.addEvent(event);
     }
    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable long id) {
