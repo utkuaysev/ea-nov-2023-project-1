@@ -1,4 +1,4 @@
-package com.project.ea.Service;
+package com.project.ea.service;
 
 import com.project.ea.model.Feedback;
 

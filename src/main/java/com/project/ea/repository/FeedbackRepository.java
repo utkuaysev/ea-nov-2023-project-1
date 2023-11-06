@@ -1,4 +1,4 @@
-package com.project.ea.Repository;
+package com.project.ea.repository;
 
 import com.project.ea.model.Feedback;
 import org.springframework.data.repository.CrudRepository;

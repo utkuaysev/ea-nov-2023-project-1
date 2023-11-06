@@ -1,14 +1,12 @@
-package com.project.ea.Service;
+package com.project.ea.service;
 
 
-import com.project.ea.Repository.FeedbackRepository;
+import com.project.ea.repository.FeedbackRepository;
 
-import com.project.ea.model.Alumni;
 import com.project.ea.model.Feedback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

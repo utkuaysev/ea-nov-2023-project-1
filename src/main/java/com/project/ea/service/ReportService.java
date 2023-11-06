@@ -1,8 +1,7 @@
-package com.project.ea.Service;
+package com.project.ea.service;
 
 import com.project.ea.model.Report;
 import com.project.ea.model.type.ReportType;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

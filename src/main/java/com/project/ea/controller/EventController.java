@@ -1,6 +1,6 @@
-package com.project.ea.Controller;
+package com.project.ea.controller;
 
-import com.project.ea.Service.EventService;
+import com.project.ea.service.EventService;
 import com.project.ea.model.AlumniEvent;
 import com.project.ea.model.Event;
 import lombok.RequiredArgsConstructor;

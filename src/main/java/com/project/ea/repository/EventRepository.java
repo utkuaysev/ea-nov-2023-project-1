@@ -1,7 +1,5 @@
-package com.project.ea.Repository;
+package com.project.ea.repository;
 
-import com.project.ea.model.Alumni;
-import com.project.ea.model.AlumniEvent;
 import com.project.ea.model.Event;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

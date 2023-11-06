@@ -1,4 +1,4 @@
-package com.project.ea.Repository;
+package com.project.ea.repository;
 
 import com.project.ea.model.Report;
 import com.project.ea.model.type.ReportType;
