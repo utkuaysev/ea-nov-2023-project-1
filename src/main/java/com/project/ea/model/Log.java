@@ -4,8 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,4 +19,10 @@ public class Log {
     private LocalDateTime date;
     private String operation;
     private long duration;
+
+    public Log(LocalDateTime date, String operation, long duration) {
+        this.date = date;
+        this.operation = operation;
+        this.duration = duration;
+    }
 }
