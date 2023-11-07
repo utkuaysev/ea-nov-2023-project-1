@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Address extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Address extends BaseClass {
     private String state;
     private String zip;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Company company;
 
     @OneToOne(mappedBy = "address")

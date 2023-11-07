@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class EduExperience extends TimeTrack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
