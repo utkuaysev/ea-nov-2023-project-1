@@ -1,7 +1,6 @@
 package com.project.ea.model;
 import com.project.ea.model.base.BaseClass;
-import com.project.ea.model.type.EventType;
-import com.project.ea.model.type.ReportType;
+import com.project.ea.model.type.PublicationType;
 import lombok.Getter;import lombok.Setter;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Where;
@@ -10,7 +9,7 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Where(clause = "isDeleted = false")
-public class Report extends BaseClass {
+public class Publication extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,8 +17,8 @@ public class Report extends BaseClass {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "report_type_id")
-    private ReportType reportType;
+    @JoinColumn(name = "publication_type_id")
+    private PublicationType publicationType;
 
     // Constructors can be omitted because Lombok generates them
 }

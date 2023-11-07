@@ -19,7 +19,10 @@ public class University extends BaseClass {
 
     private boolean  isDeleted;
     private String name;
-    private String location;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
     private List<EduExperience> eduExperiences;

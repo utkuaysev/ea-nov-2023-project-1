@@ -20,6 +20,8 @@ public class Event extends TimeTrack {
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
 
+    private String description;
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<AlumniEvent> alumniEvents;
     // Constructors can be omitted because Lombok generates them

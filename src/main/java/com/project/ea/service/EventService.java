@@ -6,7 +6,7 @@ import com.project.ea.model.Event;
 import java.util.List;
 
 public interface EventService {
-    Event AddEvent(Event event);
+    Event addEvent(Event event);
     void deleteById(long id);
     Event updateById(long id,Event event);
     Event getById(long id);
