@@ -11,8 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Where(clause = "isDeleted = false")
-
+@Where(clause = "is_deleted = false")
 public class Company extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +20,7 @@ public class Company extends BaseClass {
     private String name;
     private String industry;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 

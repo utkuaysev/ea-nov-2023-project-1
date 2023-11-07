@@ -121,3 +121,58 @@ WHERE id = 1;
 UPDATE Alumni
 SET address_id = 3
 WHERE id = 1;
+
+-- Set auto-increment for publication_type table
+ALTER TABLE publication_type AUTO_INCREMENT = 4;
+
+-- Set auto-increment for event_type table
+ALTER TABLE event_type AUTO_INCREMENT = 5;
+
+-- Set auto-increment for alumni table
+ALTER TABLE alumni_portal.alumni AUTO_INCREMENT = 3;
+
+-- Set auto-increment for company table
+ALTER TABLE alumni_portal.company AUTO_INCREMENT = 3;
+
+-- Set auto-increment for event_type table
+ALTER TABLE alumni_portal.event_type AUTO_INCREMENT = 4;
+
+-- Set auto-increment for event table
+ALTER TABLE alumni_portal.event AUTO_INCREMENT = 3;
+
+-- Set auto-increment for alumni_event table
+ALTER TABLE alumni_portal.alumni_event AUTO_INCREMENT = 3;
+
+-- Set auto-increment for feedback table
+ALTER TABLE alumni_portal.feedback AUTO_INCREMENT = 3;
+
+-- Set auto-increment for log table
+ALTER TABLE alumni_portal.log AUTO_INCREMENT = 3;
+
+-- Set auto-increment for open_job table
+ALTER TABLE alumni_portal.open_job AUTO_INCREMENT = 3;
+
+-- Set auto-increment for open_job_alumni_applications table
+ALTER TABLE alumni_portal.open_job_alumni_applications AUTO_INCREMENT = 3;
+
+-- Set auto-increment for prof_experience table
+ALTER TABLE alumni_portal.prof_experience AUTO_INCREMENT = 3;
+
+-- Set auto-increment for publication table
+ALTER TABLE alumni_portal.publication AUTO_INCREMENT = 3;
+
+-- Set auto-increment for university table
+ALTER TABLE alumni_portal.university AUTO_INCREMENT = 3;
+
+-- Set auto-increment for course table
+ALTER TABLE alumni_portal.course AUTO_INCREMENT = 3;
+
+-- Set auto-increment for edu_experience table
+ALTER TABLE alumni_portal.edu_experience AUTO_INCREMENT = 3;
+
+-- Set auto-increment for edu_experience_course table
+ALTER TABLE alumni_portal.edu_experience_course AUTO_INCREMENT = 3;
+
+-- Set auto-increment for Address table
+ALTER TABLE Address AUTO_INCREMENT = 4;
+

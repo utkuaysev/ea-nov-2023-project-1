@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Course extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

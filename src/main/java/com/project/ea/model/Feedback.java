@@ -7,7 +7,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @Setter
-@Where(clause = "isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Feedback extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
