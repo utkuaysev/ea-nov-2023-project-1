@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,9 @@ public class AlumniServiceImpl implements AlumniService {
     @Override
     public List<GetAlumniDto> getAlumniByGraduationYear(int year) {
         List<GetAlumniDto> result = new ArrayList<>();
-        var alumni = alumniRepo.findByEduExperience_EndDate_Year(year);
+        LocalDate localDate1 = LocalDate.of(year,1,1);
+        LocalDate localDate2 = LocalDate.of(year,12,31);
+        var alumni = alumniRepo.findByEduExperience_EndDateBetween(localDate1,localDate2);
         alumni.forEach(a -> result.add(modelMapper.map(a, GetAlumniDto.class)));
         return result;
     }

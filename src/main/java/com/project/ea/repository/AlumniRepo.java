@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 @Repository
 public interface AlumniRepo extends ListCrudRepository<Alumni,Long> {
-    List<Alumni> findByEduExperience_EndDate_Year(int year);
+    List<Alumni> findByEduExperience_EndDateBetween(LocalDate localDate1, LocalDate localDate2);
     List<Alumni> findByEduExperience_Courses_Name(String courseName);
     List<Alumni> findByAddress(Address address);
     List<Alumni> findByProfExperiences_Company_Industry(String industry);
