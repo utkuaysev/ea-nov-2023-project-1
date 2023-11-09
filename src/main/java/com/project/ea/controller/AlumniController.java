@@ -1,12 +1,10 @@
 package com.project.ea.controller;
 
-import com.project.ea.dto.get.GetAlumniDto;
-import com.project.ea.dto.post.PostAlumniDto;
+import com.project.ea.dto.get.GetFullAlumniDto;
+import com.project.ea.dto.post.PostFullAlumniDto;
 import com.project.ea.model.Address;
 import com.project.ea.service.AlumniService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,23 +23,23 @@ public class AlumniController {
 */
 
     @GetMapping
-    public List<GetAlumniDto> getAllAlumni() {
+    public List<GetFullAlumniDto> getAllAlumni() {
         return alumniService.getAllAlumni();
     }
 
     @GetMapping("/{id}")
-    public GetAlumniDto getAlumniById(@PathVariable long id) {
+    public GetFullAlumniDto getAlumniById(@PathVariable long id) {
         return alumniService.getAlumniById(id);
     }
 
     @PostMapping
-    public GetAlumniDto saveAlumni(@RequestBody PostAlumniDto postAlumniDto) {
-        return alumniService.saveAlumni(postAlumniDto);
+    public GetFullAlumniDto saveAlumni(@RequestBody PostFullAlumniDto postFullAlumniDto) {
+        return alumniService.saveAlumni(postFullAlumniDto);
     }
 
     @PutMapping("/{id}")
-    public GetAlumniDto updateAlumni(@PathVariable long id, @RequestBody PostAlumniDto postAlumniDto) {
-        return alumniService.updateAlumni(id, postAlumniDto);
+    public GetFullAlumniDto updateAlumni(@PathVariable long id, @RequestBody PostFullAlumniDto postFullAlumniDto) {
+        return alumniService.updateAlumni(id, postFullAlumniDto);
     }
 
     @DeleteMapping("/{id}")
@@ -49,22 +47,22 @@ public class AlumniController {
         alumniService.deleteAlumni(id);
     }
     @GetMapping("/graduationYear/{year}")
-    public List<GetAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
+    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
         return alumniService.getAlumniByGraduationYear(year);
     }
 
     @GetMapping("/courseName/{courseName}")
-    public List<GetAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
+    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
         return alumniService.getAlumniByCourseName(courseName);
     }
 
     @GetMapping("/address")
-    public List<GetAlumniDto> getAlumniByAddress(@RequestBody Address address) {
+    public List<GetFullAlumniDto> getAlumniByAddress(@RequestBody Address address) {
         return alumniService.getAlumniByAddress(address);
     }
 
     @GetMapping("/industry/{industry}")
-    public List<GetAlumniDto> getAlumniByIndustry(@PathVariable String industry) {
+    public List<GetFullAlumniDto> getAlumniByIndustry(@PathVariable String industry) {
         return alumniService.getAlumniByIndustry(industry);
     }
 

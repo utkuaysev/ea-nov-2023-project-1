@@ -1,22 +1,22 @@
 package com.project.ea.service;
 
-import com.project.ea.dto.get.GetAlumniDto;
-import com.project.ea.dto.post.PostAlumniDto;
+import com.project.ea.dto.get.GetFullAlumniDto;
+import com.project.ea.dto.post.PostFullAlumniDto;
 import com.project.ea.model.Address;
 
 
 import java.util.List;
 
 public interface AlumniService {
-    List<GetAlumniDto> getAllAlumni();
-    GetAlumniDto getAlumniById(long id);
-    GetAlumniDto saveAlumni(PostAlumniDto postAlumniDto);
-    GetAlumniDto updateAlumni(long id, PostAlumniDto postAlumniDto);
+    List<GetFullAlumniDto> getAllAlumni();
+    GetFullAlumniDto getAlumniById(long id);
+    GetFullAlumniDto saveAlumni(PostFullAlumniDto postFullAlumniDto);
+    GetFullAlumniDto updateAlumni(long id, PostFullAlumniDto postFullAlumniDto);
     void deleteAlumni(long id);
-    List<GetAlumniDto> getAlumniByGraduationYear(int year);
-    List<GetAlumniDto> getAlumniByCourseName(String courseName);
-    List<GetAlumniDto> getAlumniByAddress(Address address);
-    List<GetAlumniDto> getAlumniByIndustry(String industry);
+    List<GetFullAlumniDto> getAlumniByGraduationYear(int year);
+    List<GetFullAlumniDto> getAlumniByCourseName(String courseName);
+    List<GetFullAlumniDto> getAlumniByAddress(Address address);
+    List<GetFullAlumniDto> getAlumniByIndustry(String industry);
 
 
 }

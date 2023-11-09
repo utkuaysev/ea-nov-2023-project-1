@@ -1,7 +1,7 @@
 package com.project.ea.service;
 
-import com.project.ea.dto.get.GetUniversityDto;
-import com.project.ea.dto.post.PostUniversityDto;
+import com.project.ea.dto.get.GetFullUniversityDto;
+import com.project.ea.dto.post.PostFullUniversityDto;
 import com.project.ea.model.University;
 import com.project.ea.repository.UniversityRepo;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class UniversityServiceImpl implements UniversityService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<GetUniversityDto> getAllUniversities() {
+    public List<GetFullUniversityDto> getAllUniversities() {
         List<University> universities = universityRepo.findAll();
         return universities.stream()
                 .map(this::convertToDto)
@@ -26,21 +26,21 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
-    public GetUniversityDto getUniversityById(long id) {
+    public GetFullUniversityDto getUniversityById(long id) {
         University university = universityRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("University not found with id: " + id));
         return convertToDto(university);
     }
 
     @Override
-    public GetUniversityDto saveUniversity(PostUniversityDto postUniversityDto) {
-        University university = convertToEntity(postUniversityDto);
+    public GetFullUniversityDto saveUniversity(PostFullUniversityDto postFullUniversityDto) {
+        University university = convertToEntity(postFullUniversityDto);
         University savedUniversity = universityRepo.save(university);
         return convertToDto(savedUniversity);
     }
 
     @Override
-    public GetUniversityDto updateUniversity(long id, PostUniversityDto postUniversityDto) {
+    public GetFullUniversityDto updateUniversity(long id, PostFullUniversityDto postFullUniversityDto) {
         University university = universityRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("University not found with id: " + id));
         university.setId(id);
@@ -56,11 +56,11 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     // Helper methods for conversion
-    private GetUniversityDto convertToDto(University university) {
-        return modelMapper.map(university, GetUniversityDto.class);
+    private GetFullUniversityDto convertToDto(University university) {
+        return modelMapper.map(university, GetFullUniversityDto.class);
     }
 
-    private University convertToEntity(PostUniversityDto postUniversityDto) {
-        return modelMapper.map(postUniversityDto, University.class);
+    private University convertToEntity(PostFullUniversityDto postFullUniversityDto) {
+        return modelMapper.map(postFullUniversityDto, University.class);
     }
 }

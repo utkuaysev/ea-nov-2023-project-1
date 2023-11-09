@@ -1,11 +1,9 @@
 package com.project.ea.controller;
 
-import com.project.ea.dto.get.GetUniversityDto;
-import com.project.ea.dto.post.PostUniversityDto;
+import com.project.ea.dto.get.GetFullUniversityDto;
+import com.project.ea.dto.post.PostFullUniversityDto;
 import com.project.ea.service.UniversityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,23 +15,23 @@ public class UniversityController {
     private final UniversityService universityService;
 
     @GetMapping
-    public List<GetUniversityDto> getAllUniversities() {
+    public List<GetFullUniversityDto> getAllUniversities() {
         return universityService.getAllUniversities();
     }
 
     @GetMapping("/{id}")
-    public GetUniversityDto getUniversityById(@PathVariable long id) {
+    public GetFullUniversityDto getUniversityById(@PathVariable long id) {
         return universityService.getUniversityById(id);
     }
 
     @PostMapping
-    public GetUniversityDto saveUniversity(@RequestBody PostUniversityDto postUniversityDto) {
-        return universityService.saveUniversity(postUniversityDto);
+    public GetFullUniversityDto saveUniversity(@RequestBody PostFullUniversityDto postFullUniversityDto) {
+        return universityService.saveUniversity(postFullUniversityDto);
     }
 
     @PutMapping("/{id}")
-    public GetUniversityDto updateUniversity(@PathVariable long id, @RequestBody PostUniversityDto postUniversityDto) {
-        return universityService.updateUniversity(id, postUniversityDto);
+    public GetFullUniversityDto updateUniversity(@PathVariable long id, @RequestBody PostFullUniversityDto postFullUniversityDto) {
+        return universityService.updateUniversity(id, postFullUniversityDto);
     }
 
     @DeleteMapping("/{id}")
