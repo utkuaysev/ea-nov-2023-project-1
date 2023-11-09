@@ -4,6 +4,7 @@ import com.project.ea.repository.EventRepository;
 import com.project.ea.model.AlumniEvent;
 import com.project.ea.model.Event;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
+    private final ModelMapper modelMapper;
 
 
     @Override
