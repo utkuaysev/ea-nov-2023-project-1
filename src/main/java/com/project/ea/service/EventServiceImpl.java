@@ -29,11 +29,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public GetFullEventDto getById(long id) {
-        return null;
+        var result=eventRepository.findById(id);
+        return modelMapper.map(result, GetFullEventDto.class);
     }
 
     @Override
     public GetFullEventDto addEvent(PostFullEventDto postFullEventDto) {
+
         return null;
     }
 
