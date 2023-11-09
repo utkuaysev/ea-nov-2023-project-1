@@ -1,4 +1,4 @@
-package com.project.ea.dto.get;
+package com.project.ea.dto.post;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,11 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GetFullEduExperienceDto {
-    private Long id;
+public class PostFullEduExperienceDto {
+    private Long universityId;
     private String degree;
-    private String universityName;
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<GetFullCourseDto> courseList;
+    private List<Long> courseIdList;
 }

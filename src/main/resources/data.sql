@@ -94,14 +94,12 @@ VALUES
 -- Insert data into the edu_experience table
 INSERT INTO alumni_portal.edu_experience (is_deleted, alumni_id, university_id, degree, start_date, end_date)
 VALUES
-    (0, 1, 1, 'Bachelor of Science', '2018-09-01', '2022-05-15'),
-    (0, 2, 2, 'Master of Business Administration', '2017-08-20', '2019-06-30');
+    (0, 1, 1, 'Bachelor of Science', '2018-09-01', '2022-05-15');
 
 -- Insert data into the edu_experience_course table
 INSERT INTO alumni_portal.edu_experience_course (edu_experience_id, course_id)
 VALUES
-    (1, 1),
-    (2, 2);
+    (1, 1);
 
 INSERT INTO Address (id, street, city, state, zip, is_deleted)
 VALUES
@@ -168,10 +166,10 @@ ALTER TABLE alumni_portal.university AUTO_INCREMENT = 3;
 ALTER TABLE alumni_portal.course AUTO_INCREMENT = 3;
 
 -- Set auto-increment for edu_experience table
-ALTER TABLE alumni_portal.edu_experience AUTO_INCREMENT = 3;
+ALTER TABLE alumni_portal.edu_experience AUTO_INCREMENT = 2;
 
 -- Set auto-increment for edu_experience_course table
-ALTER TABLE alumni_portal.edu_experience_course AUTO_INCREMENT = 3;
+ALTER TABLE alumni_portal.edu_experience_course AUTO_INCREMENT = 2;
 
 -- Set auto-increment for Address table
 ALTER TABLE Address AUTO_INCREMENT = 4;
