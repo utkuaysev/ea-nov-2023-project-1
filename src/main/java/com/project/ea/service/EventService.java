@@ -1,9 +1,8 @@
 package com.project.ea.service;
 
 import com.project.ea.dto.get.GetFullEventDto;
-import com.project.ea.dto.post.PostFullAlumniEvent;
+import com.project.ea.dto.post.PostFullAlumniEventDto;
 import com.project.ea.dto.post.PostFullEventDto;
-import com.project.ea.model.AlumniEvent;
 
 import java.util.List;
 
@@ -18,7 +17,4 @@ public interface EventService {
 
     void deleteById(long id);
 
-    GetFullEventDto addAlumniEventToEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent);
-
-    GetFullEventDto updateAlumniEventInEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent);
 }
