@@ -1,12 +1,15 @@
 package com.project.ea.service;
 
-import com.project.ea.model.Feedback;
+import com.project.ea.dto.get.GetAFullFeedbackDto;
+import com.project.ea.dto.post.PostFullFeedbackDto;
 
 import java.util.List;
 
 public interface FeedbackService {
-    Feedback saveFeedback(Feedback feedback);
-    Feedback updateFeedback(Long feedbackId, Feedback updatedFeedback);
+    List<GetAFullFeedbackDto> getAllFeedBacks();
+    GetAFullFeedbackDto getFeedBackById(Long id);
+    GetAFullFeedbackDto saveFeedback(PostFullFeedbackDto postFullFeedbackDto);
+    GetAFullFeedbackDto updateFeedback(Long feedbackId, PostFullFeedbackDto postFullFeedbackDto);
     void deleteFeedback(Long feedbackId);
-    List<Feedback> findByAlumniId(Long alumniId);
+    List<GetAFullFeedbackDto> findByAlumniId(Long alumniId);
 }

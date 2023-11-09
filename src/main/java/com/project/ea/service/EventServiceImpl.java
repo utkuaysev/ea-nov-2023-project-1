@@ -1,5 +1,8 @@
 package com.project.ea.service;
 
+import com.project.ea.dto.get.GetFullEventDto;
+import com.project.ea.dto.post.PostFullAlumniEvent;
+import com.project.ea.dto.post.PostFullEventDto;
 import com.project.ea.repository.EventRepository;
 import com.project.ea.model.AlumniEvent;
 import com.project.ea.model.Event;
@@ -7,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -15,72 +19,41 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
 
+    @Override
+    public List<GetFullEventDto> getAll() {
+        var result = eventRepository.findAll();
+        List<GetFullEventDto> getFullEventDtos = new ArrayList<>();
+        result.forEach(event -> modelMapper.map(event, GetFullEventDto.class));
+        return getFullEventDtos;
+    }
 
     @Override
-    public Event addEvent(Event event) {
-        if (event.getEventType() == null) {
-            throw new IllegalArgumentException("Event type is required.");
-        }
-        return eventRepository.save(event);
+    public GetFullEventDto getById(long id) {
+        return null;
+    }
+
+    @Override
+    public GetFullEventDto addEvent(PostFullEventDto postFullEventDto) {
+        return null;
+    }
+
+    @Override
+    public GetFullEventDto updateById(long id, PostFullEventDto postFullEventDto) {
+        return null;
     }
 
     @Override
     public void deleteById(long id) {
-        eventRepository.deleteById(id);
+
     }
 
     @Override
-    public Event updateById(long id, Event event) {
-         if(eventRepository.existsById(id)){
-             event.setId(id);
-             return eventRepository.save(event);
-         }throw new IllegalArgumentException("Event with ID " + id + " not found.");
-    }
-
-
-
-    @Override
-    public Event getById(long id) {
-        return eventRepository.findById(id).orElseThrow(() -> new RuntimeException("""
-                no such element with the give id: ${id}"""));
+    public GetFullEventDto addAlumniEventToEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent) {
+        return null;
     }
 
     @Override
-    public List<Event> getAll() {
-        return (List<Event>) eventRepository.findAll();
-    }
-
-    @Override
-    public Event addAlumniEventToEvent(Long eventId, AlumniEvent alumniEvent) {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
-
-        alumniEvent.setEvent(event);
-        event.getAlumniEvents().add(alumniEvent);
-        eventRepository.save(event);
-
-        return event;
-    }
-
-    @Override
-    public Event updateAlumniEventInEvent(Long eventId, AlumniEvent alumniEvent) {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
-
-        AlumniEvent existingAlumniEvent = event.getAlumniEvents().stream()
-                .filter(ae -> ae.getId().equals(alumniEvent.getId()))
-                .findFirst()
-                .orElse(null);
-
-        if (existingAlumniEvent == null) {
-            throw new IllegalArgumentException("AlumniEvent not found in Event");
-        }
-
-        // Update properties of existingAlumniEvent with the properties of updatedAlumniEvent.
-      //  existingAlumniEvent.setAlumniEvent(updatedAlumniEvent.getAlumniEvent());
-
-        eventRepository.save(event);
-
-        return event;
+    public GetFullEventDto updateAlumniEventInEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent) {
+        return null;
     }
 }

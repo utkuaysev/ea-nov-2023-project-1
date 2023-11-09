@@ -1,18 +1,24 @@
 package com.project.ea.service;
 
+import com.project.ea.dto.get.GetFullEventDto;
+import com.project.ea.dto.post.PostFullAlumniEvent;
+import com.project.ea.dto.post.PostFullEventDto;
 import com.project.ea.model.AlumniEvent;
-import com.project.ea.model.Event;
 
 import java.util.List;
 
 public interface EventService {
-    Event addEvent(Event event);
+    List<GetFullEventDto> getAll();
+
+    GetFullEventDto getById(long id);
+
+    GetFullEventDto addEvent(PostFullEventDto postFullEventDto);
+
+    GetFullEventDto updateById(long id, PostFullEventDto postFullEventDto);
+
     void deleteById(long id);
-    Event updateById(long id,Event event);
-    Event getById(long id);
-    List<Event> getAll();
-    Event addAlumniEventToEvent(Long eventId, AlumniEvent alumniEvent);
-    Event updateAlumniEventInEvent(Long eventId, AlumniEvent alumniEvent);
+
+    GetFullEventDto addAlumniEventToEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent);
+
+    GetFullEventDto updateAlumniEventInEvent(Long eventId, PostFullAlumniEvent postFullAlumniEvent);
 }
-//    AlumniEvent addAlumniEvent(AlumniEvent alumniEvent, Event event);
-//    AlumniEvent updateById(long id,AlumniEvent alumniEvent);
