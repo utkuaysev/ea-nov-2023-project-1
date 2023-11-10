@@ -5,7 +5,7 @@ import com.project.ea.dto.post.PostFullOpenJobDto;
 import com.project.ea.model.Alumni;
 import com.project.ea.model.Company;
 import com.project.ea.model.OpenJob;
-import com.project.ea.repository.AlumniRepo;
+import com.project.ea.repository.AlumniRepository;
 import com.project.ea.repository.CompanyRepository;
 import com.project.ea.repository.OpenJobRepository;
 import jakarta.transaction.Transactional;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class OpenJobServiceImpl implements OpenJobService {
     private final OpenJobRepository openJobRepository;
     private final CompanyRepository companyRepo;
-    private final AlumniRepo alumniRepo;
+    private final AlumniRepository alumniRepo;
     private final ModelMapper modelMapper;
 
     @Override

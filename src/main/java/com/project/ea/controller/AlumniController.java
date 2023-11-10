@@ -14,13 +14,6 @@ import java.util.List;
 @RequestMapping("/alumni")
 public class AlumniController {
     private final AlumniService alumniService;
-      /*  /alumnies/search?graduationYear -> bacha
-/alumnies/search?course_name -> bacha
-/alumnies/search/location -> bacha
-    We need location body
-/alumnies/search?industry -> bacha
-    Crud university  -> bacha
-*/
 
     @GetMapping
     public List<GetFullAlumniDto> getAllAlumni() {

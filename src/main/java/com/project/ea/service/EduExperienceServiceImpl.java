@@ -4,10 +4,10 @@ import com.project.ea.dto.post.PostFullEduExperienceDto;
 import com.project.ea.dto.get.GetFullEduExperienceDto;
 import com.project.ea.dto.get.GetFullCourseDto;
 import com.project.ea.model.*;
-import com.project.ea.repository.AlumniRepo;
-import com.project.ea.repository.CourseRepo;
+import com.project.ea.repository.AlumniRepository;
+import com.project.ea.repository.CourseRepository;
 import com.project.ea.repository.EduExperienceRepository;
-import com.project.ea.repository.UniversityRepo;
+import com.project.ea.repository.UniversityRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,26 +16,25 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EduExperienceServiceImpl implements EduExperienceService {
     private final EduExperienceRepository eduExperienceRepository;
-    private final UniversityRepo universityRepo;
-    private final CourseRepo courseRepo;
-    private final AlumniRepo alumniRepo;
+    private final UniversityRepository universityRepository;
+    private final CourseRepository courseRepository;
+    private final AlumniRepository alumniRepository;
     private final ModelMapper modelMapper;
 
     @Override
     public GetFullEduExperienceDto addEduExperience(Long alumniId, PostFullEduExperienceDto eduExperienceDto) {
-        University university = universityRepo.findById(eduExperienceDto.getUniversityId())
+        University university = universityRepository.findById(eduExperienceDto.getUniversityId())
                 .orElseThrow(() -> new RuntimeException("University not found with id: " + eduExperienceDto.getUniversityId()));
-        Alumni alumni = alumniRepo.findById(alumniId)
+        Alumni alumni = alumniRepository.findById(alumniId)
                 .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + eduExperienceDto.getUniversityId()));
         List<Course> courseList = new ArrayList<>();
         eduExperienceDto.getCourseIdList().forEach(courseId -> {
-            Course course = courseRepo.findById(courseId).orElseThrow();
+            Course course = courseRepository.findById(courseId).orElseThrow();
             if (course.getUniversity().getId() != university.getId()) {
                 throw new NoSuchElementException("Course not found with id:" + courseId);
             }
@@ -58,13 +57,13 @@ public class EduExperienceServiceImpl implements EduExperienceService {
     @Transactional
     @Override
     public GetFullEduExperienceDto updateById(Long alumniId, PostFullEduExperienceDto eduExperienceDto) {
-        University university = universityRepo.findById(eduExperienceDto.getUniversityId())
+        University university = universityRepository.findById(eduExperienceDto.getUniversityId())
                 .orElseThrow(() -> new RuntimeException("University not found with id: " + eduExperienceDto.getUniversityId()));
-        Alumni alumni = alumniRepo.findById(alumniId)
+        Alumni alumni = alumniRepository.findById(alumniId)
                 .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + eduExperienceDto.getUniversityId()));
         List<Course> courseList = new ArrayList<>();
         eduExperienceDto.getCourseIdList().forEach(courseId -> {
-            Course course = courseRepo.findById(courseId).orElseThrow();
+            Course course = courseRepository.findById(courseId).orElseThrow();
             if (course.getUniversity().getId() != university.getId()) {
                 throw new NoSuchElementException("Course not found with id:" + courseId);
             }
