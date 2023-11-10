@@ -21,6 +21,8 @@ public class GetFullOpenJobDto {
     private Long id;
     private String companyName;
     private String companyIndustry;
+    private String state;
+    private String city;
     private String description;
     private LocalDateTime openDate;
     private InnerAlumniDto creator;

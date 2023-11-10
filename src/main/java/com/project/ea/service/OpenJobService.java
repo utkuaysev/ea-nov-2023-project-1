@@ -13,6 +13,12 @@ public interface OpenJobService {
 
     GetFullOpenJobDto getById(Long alumniId);
 
+    List<GetFullOpenJobDto> searchByState(String state);
+
+    List<GetFullOpenJobDto> searchByCity(String city);
+
+    List<GetFullOpenJobDto> searchBycompanyName(String companyName);
+
 
     @Transactional
     GetFullOpenJobDto updateById(Long id, PostFullOpenJobDto openJobDto);

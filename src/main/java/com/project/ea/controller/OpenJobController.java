@@ -3,6 +3,7 @@ package com.project.ea.controller;
 import com.project.ea.dto.get.GetFullOpenJobDto;
 import com.project.ea.dto.post.PostFullOpenJobDto;
 import com.project.ea.service.OpenJobService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,31 @@ public class OpenJobController {
     public GetFullOpenJobDto getOpenJobById(@PathVariable Long id) {
         try {
             return openJobService.getById(id);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
+        }
+    }
+
+    @GetMapping("/searchByState")
+    public List<GetFullOpenJobDto> searchByState(@RequestParam String state) {
+        try {
+            return openJobService.searchByState(state);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
+        }
+    }
+    @GetMapping("/searchByCity")
+    public List<GetFullOpenJobDto> searchByCity(@RequestParam String city) {
+        try {
+            return openJobService.searchByCity(city);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
+        }
+    }
+    @GetMapping("/searchByCompanyName")
+    public List<GetFullOpenJobDto> searchByCompanyName(@RequestParam String companyName) {
+        try {
+            return openJobService.searchBycompanyName(companyName);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
         }

@@ -13,6 +13,12 @@ public interface OpenJobRepository extends ListCrudRepository<OpenJob, Long> {
     List<OpenJob> findAll();
     Optional<OpenJob> findById(Long id);
 
+    List<OpenJob> findAllByCompany_Address_State(String state);
+
+    List<OpenJob> findAllByCompany_Address_City(String city);
+
+    List<OpenJob> findAllByCompany_Name(String companyName);
+
     @Override
     default void delete(OpenJob openJob) {
         openJob.setDeleted(true);

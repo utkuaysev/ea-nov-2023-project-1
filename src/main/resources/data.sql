@@ -105,12 +105,17 @@ INSERT INTO Address (id, street, city, state, zip, is_deleted)
 VALUES
     (1, '123 Main St', 'New York', 'NY', '10001', false),
     (2, '456 Elm St', 'Los Angeles', 'CA', '90001', false),
-    (3, '789 Oak St', 'Chicago', 'IL', '60601', false);
+    (3, '789 Oak St', 'Chicago', 'IL', '60601', false),
+    (4, '4 Oak St', 'Fairfield', 'IA', '60601', false);
 
 -- Update Company, University, and Alumni tables with the corresponding address
 UPDATE Company
 SET address_id = 1
 WHERE id = 1;
+
+UPDATE Company
+SET address_id = 4
+WHERE id = 2;
 
 UPDATE University
 SET address_id = 2

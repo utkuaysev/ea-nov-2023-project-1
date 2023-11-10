@@ -60,6 +60,28 @@ public class OpenJobServiceImpl implements OpenJobService {
         return populateAndReturnDto(openJob);
     }
 
+    @Override
+    public List<GetFullOpenJobDto> searchByState(String state) {
+        return openJobRepository.findAllByCompany_Address_State(state).stream()
+                .map(this::populateAndReturnDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GetFullOpenJobDto> searchByCity(String city) {
+        return openJobRepository.findAllByCompany_Address_City(city).stream()
+                .map(this::populateAndReturnDto)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<GetFullOpenJobDto> searchBycompanyName(String companyName) {
+        return openJobRepository.findAllByCompany_Name(companyName).stream()
+                .map(this::populateAndReturnDto)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     @Override
     public GetFullOpenJobDto updateById(Long id, PostFullOpenJobDto openJobDto) {
@@ -96,6 +118,8 @@ public class OpenJobServiceImpl implements OpenJobService {
         GetFullOpenJobDto obj = modelMapper.map(openJob, GetFullOpenJobDto.class);
         obj.setCompanyName(openJob.getCompany().getName());
         obj.setCompanyIndustry(openJob.getCompany().getIndustry());
+        obj.setState(openJob.getCompany().getAddress().getState());
+        obj.setCity(openJob.getCompany().getAddress().getCity());
         obj.setApplicants(
                 openJob.getApplicants().stream()
                         .map(alumni -> modelMapper.map(alumni, GetFullOpenJobDto.InnerAlumniDto.class))
