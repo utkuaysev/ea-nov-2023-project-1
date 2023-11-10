@@ -15,6 +15,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public GetFullEventDto getById(long id) {
+
         return null;
     }
 
