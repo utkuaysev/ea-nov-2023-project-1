@@ -16,5 +16,9 @@ public interface CompanyRepository extends ListCrudRepository<Company, Long> {
         if (address != null) {
             address.setDeleted(true);
         }
+        company.getProfExperiences()
+                .forEach(profExperience -> profExperience.setDeleted(true));
+        company.getOpenJobs()
+                .forEach(openJob -> openJob.setDeleted(true));
     }
 }

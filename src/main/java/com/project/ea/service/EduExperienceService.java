@@ -4,12 +4,9 @@ import com.project.ea.dto.post.PostFullEduExperienceDto;
 import com.project.ea.dto.get.GetFullEduExperienceDto;
 import jakarta.transaction.Transactional;
 
-import java.util.List;
-
 public interface EduExperienceService {
-    List<GetFullEduExperienceDto> getAllByAlumniId(Long id);
 
-    GetFullEduExperienceDto getById(Long alumniId);
+    GetFullEduExperienceDto getByAlumniId(Long alumniId);
 
 
     @Transactional

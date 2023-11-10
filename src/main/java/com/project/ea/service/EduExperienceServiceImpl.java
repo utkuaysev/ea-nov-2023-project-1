@@ -50,14 +50,7 @@ public class EduExperienceServiceImpl implements EduExperienceService {
     }
 
     @Override
-    public List<GetFullEduExperienceDto> getAllByAlumniId(Long id) {
-        return eduExperienceRepository.findAllByAlumni_Id(id).stream()
-                .map(this::populateCoursesAndReturnDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public GetFullEduExperienceDto getById(Long alumniId) {
+    public GetFullEduExperienceDto getByAlumniId(Long alumniId) {
         EduExperience eduExperience = eduExperienceRepository.findByAlumni_Id(alumniId).orElseThrow();
         return populateCoursesAndReturnDto(eduExperience);
     }

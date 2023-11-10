@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -26,7 +25,7 @@ public class EduExperienceController {
     @GetMapping
     public GetFullEduExperienceDto getEduExperienceById(@PathVariable Long alumniId){
         try {
-            return eduExperienceService.getById(alumniId);
+            return eduExperienceService.getByAlumniId(alumniId);
         }catch (NoSuchElementException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Edu experience not found");
         }

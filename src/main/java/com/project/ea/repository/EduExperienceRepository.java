@@ -11,9 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface EduExperienceRepository extends ListCrudRepository<EduExperience, Long> {
-    List<EduExperience> findAllByAlumni_Id(Long alumniId);
     Optional<EduExperience> findByAlumni_Id(Long alumniId);
-
     @Override
     default void delete(EduExperience eduExperience) {
         eduExperience.setDeleted(true);
