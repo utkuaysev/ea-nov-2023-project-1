@@ -3,10 +3,9 @@ package com.project.ea.service;
 import com.project.ea.dto.get.GetFullProfExperienceDto;
 import com.project.ea.dto.post.PostFullProfExperienceDto;
 import com.project.ea.model.Alumni;
-import com.project.ea.model.Course;
 import com.project.ea.model.ProfExperience;
 import com.project.ea.model.Company;
-import com.project.ea.repository.AlumniRepo;
+import com.project.ea.repository.AlumniRepository;
 import com.project.ea.repository.ProfExperienceRepository;
 import com.project.ea.repository.CompanyRepository;
 import jakarta.transaction.Transactional;
@@ -14,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,14 +21,14 @@ import java.util.stream.Collectors;
 public class ProfExperienceServiceImpl implements ProfExperienceService {
     private final ProfExperienceRepository profExperienceRepository;
     private final CompanyRepository companyRepo;
-    private final AlumniRepo alumniRepo;
+    private final AlumniRepository alumniRepository;
     private final ModelMapper modelMapper;
 
     @Override
     public GetFullProfExperienceDto addProfExperience(Long alumniId, PostFullProfExperienceDto profExperienceDto) {
         Company company = companyRepo.findById(profExperienceDto.getCompanyId())
                 .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
-        Alumni alumni = alumniRepo.findById(alumniId)
+        Alumni alumni = alumniRepository.findById(alumniId)
                 .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + profExperienceDto.getCompanyId()));
         ProfExperience profExperience = modelMapper.map(profExperienceDto, ProfExperience.class);
         profExperience.setCompany(company);
@@ -58,7 +55,7 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
     public GetFullProfExperienceDto updateById(Long alumniId, Long id, PostFullProfExperienceDto profExperienceDto) {
         Company company = companyRepo.findById(profExperienceDto.getCompanyId())
                 .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
-        Alumni alumni = alumniRepo.findById(alumniId)
+        Alumni alumni = alumniRepository.findById(alumniId)
                 .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + profExperienceDto.getCompanyId()));
         ProfExperience profExperience = profExperienceRepository.findByAlumni_IdAndId(alumniId, id).orElseThrow();
         profExperience.setCompany(company);
