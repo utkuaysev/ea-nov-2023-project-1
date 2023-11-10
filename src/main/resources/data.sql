@@ -127,6 +127,9 @@ UPDATE Alumni
 SET address_id = 3
 WHERE id = 1;
 
+ALTER TABLE address AUTO_INCREMENT = 5;
+
+
 -- Set auto-increment for publication_type table
 ALTER TABLE publication_type AUTO_INCREMENT = 4;
 
@@ -134,7 +137,7 @@ ALTER TABLE publication_type AUTO_INCREMENT = 4;
 ALTER TABLE event_type AUTO_INCREMENT = 5;
 
 -- Set auto-increment for alumni table
-ALTER TABLE alumni_portal.alumni AUTO_INCREMENT = 3;
+ALTER TABLE alumni_portal.alumni AUTO_INCREMENT = 4;
 
 -- Set auto-increment for company table
 ALTER TABLE alumni_portal.company AUTO_INCREMENT = 3;
@@ -161,7 +164,7 @@ ALTER TABLE alumni_portal.open_job AUTO_INCREMENT = 3;
 ALTER TABLE alumni_portal.open_job_alumni_applications AUTO_INCREMENT = 3;
 
 -- Set auto-increment for prof_experience table
-ALTER TABLE alumni_portal.prof_experience AUTO_INCREMENT = 3;
+ALTER TABLE alumni_portal.prof_experience AUTO_INCREMENT = 4;
 
 -- Set auto-increment for publication table
 ALTER TABLE alumni_portal.publication AUTO_INCREMENT = 3;
