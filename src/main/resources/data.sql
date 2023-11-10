@@ -71,7 +71,7 @@ VALUES
 INSERT INTO alumni_portal.prof_experience (is_deleted, alumni_id, company_id, start_date, end_date)
 VALUES
     (0, 1, 1, '2022-01-15', '2023-03-30'),
-    (0, 2, 2, '2021-11-20', '2023-05-10');
+    (0, 2, 2, '2021-11-20', null);
 
 -- Insert data into the publication table
 INSERT INTO alumni_portal.publication (is_deleted, publication_type_id, description)
