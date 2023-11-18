@@ -10,4 +10,5 @@ public class PostFullAlumniDto {
     private String password;
     private String phone;
     private String profilePicture;
+    private String location;
 }

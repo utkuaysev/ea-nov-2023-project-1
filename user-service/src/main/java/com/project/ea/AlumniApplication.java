@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class EaApplication {
+public class AlumniApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EaApplication.class, args);
+		SpringApplication.run(AlumniApplication.class, args);
 	}
 	@Bean
 	public ModelMapper modelMapper(){

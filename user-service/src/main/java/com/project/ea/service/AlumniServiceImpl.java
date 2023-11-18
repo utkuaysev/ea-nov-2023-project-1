@@ -2,7 +2,6 @@ package com.project.ea.service;
 
 import com.project.ea.dto.get.GetFullAlumniDto;
 import com.project.ea.dto.post.PostFullAlumniDto;
-import com.project.ea.model.Address;
 import com.project.ea.model.Alumni;
 import com.project.ea.repository.AlumniRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,37 +56,5 @@ public class AlumniServiceImpl implements AlumniService {
         alumniRepository.deleteById(id);
     }
 
-    @Override
-    public List<GetFullAlumniDto> getAlumniByGraduationYear(int year) {
-        List<GetFullAlumniDto> result = new ArrayList<>();
-        LocalDate localDate1 = LocalDate.of(year,1,1);
-        LocalDate localDate2 = LocalDate.of(year,12,31);
-        var alumni = alumniRepository.findByEduExperience_EndDateBetween(localDate1,localDate2);
-        alumni.forEach(a -> result.add(modelMapper.map(a, GetFullAlumniDto.class)));
-        return result;
-    }
 
-    @Override
-    public List<GetFullAlumniDto> getAlumniByCourseName(String courseName) {
-        List<GetFullAlumniDto> result = new ArrayList<>();
-        var alumni = alumniRepository.findByEduExperience_Courses_Name(courseName);
-        alumni.forEach(a -> result.add(modelMapper.map(a, GetFullAlumniDto.class)));
-        return result;
-    }
-
-    @Override
-    public List<GetFullAlumniDto> getAlumniByAddress(Address address) {
-        List<GetFullAlumniDto> result = new ArrayList<>();
-        var alumni = alumniRepository.findByAddress(address);
-        alumni.forEach(a -> result.add(modelMapper.map(a, GetFullAlumniDto.class)));
-        return result;
-    }
-
-    @Override
-    public List<GetFullAlumniDto> getAlumniByIndustry(String industry) {
-        List<GetFullAlumniDto> result = new ArrayList<>();
-        var alumni = alumniRepository.findByProfExperiences_Company_Industry(industry);
-        alumni.forEach(a -> result.add(modelMapper.map(a, GetFullAlumniDto.class)));
-        return result;
-    }
 }

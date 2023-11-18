@@ -25,10 +25,5 @@ public class Address extends BaseClass {
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Company company;
 
-    @OneToOne(mappedBy = "address")
-    private University university;
-
-    @OneToOne(mappedBy = "address")
-    private Alumni alumni;
     // Constructors can be omitted because Lombok generates them
 }

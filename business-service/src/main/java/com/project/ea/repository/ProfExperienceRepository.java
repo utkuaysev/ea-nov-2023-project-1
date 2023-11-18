@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface ProfExperienceRepository extends ListCrudRepository<ProfExperience, Long> {
-    List<ProfExperience> findAllByAlumni_Id(Long alumniId);
-    Optional<ProfExperience> findByAlumni_IdAndId(Long alumniId, Long id);
+//    List<ProfExperience> findAllByAlumni_Id(Long alumniId);
+//    Optional<ProfExperience> findByAlumni_IdAndId(Long alumniId, Long id);
 
     @Override
     default void delete(ProfExperience profExperience) {

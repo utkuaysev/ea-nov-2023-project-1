@@ -2,7 +2,6 @@ package com.project.ea.controller;
 
 import com.project.ea.dto.get.GetFullAlumniDto;
 import com.project.ea.dto.post.PostFullAlumniDto;
-import com.project.ea.model.Address;
 import com.project.ea.service.AlumniService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -39,24 +38,15 @@ public class AlumniController {
     public void deleteAlumni(@PathVariable long id) {
         alumniService.deleteAlumni(id);
     }
-    @GetMapping("/graduationYear/{year}")
-    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
-        return alumniService.getAlumniByGraduationYear(year);
-    }
+//    @GetMapping("/graduationYear/{year}")
+//    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
+//        return alumniService.getAlumniByGraduationYear(year);
+//    }
+//
+//    @GetMapping("/courseName/{courseName}")
+//    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
+//        return alumniService.getAlumniByCourseName(courseName);
+//    }
 
-    @GetMapping("/courseName/{courseName}")
-    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
-        return alumniService.getAlumniByCourseName(courseName);
-    }
-
-    @GetMapping("/address")
-    public List<GetFullAlumniDto> getAlumniByAddress(@RequestBody Address address) {
-        return alumniService.getAlumniByAddress(address);
-    }
-
-    @GetMapping("/industry/{industry}")
-    public List<GetFullAlumniDto> getAlumniByIndustry(@PathVariable String industry) {
-        return alumniService.getAlumniByIndustry(industry);
-    }
 
 }

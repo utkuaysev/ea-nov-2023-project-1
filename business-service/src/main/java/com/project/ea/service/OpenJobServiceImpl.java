@@ -2,10 +2,8 @@ package com.project.ea.service;
 
 import com.project.ea.dto.get.GetFullOpenJobDto;
 import com.project.ea.dto.post.PostFullOpenJobDto;
-import com.project.ea.model.Alumni;
 import com.project.ea.model.Company;
 import com.project.ea.model.OpenJob;
-import com.project.ea.repository.AlumniRepository;
 import com.project.ea.repository.CompanyRepository;
 import com.project.ea.repository.OpenJobRepository;
 import jakarta.transaction.Transactional;
@@ -21,30 +19,31 @@ import java.util.stream.Collectors;
 public class OpenJobServiceImpl implements OpenJobService {
     private final OpenJobRepository openJobRepository;
     private final CompanyRepository companyRepo;
-    private final AlumniRepository alumniRepo;
+//    private final AlumniRepository alumniRepo;
     private final ModelMapper modelMapper;
 
     @Override
     public GetFullOpenJobDto addOpenJob(PostFullOpenJobDto openJobDto) {
-        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
-        Company company = creator.getProfExperiences().stream()
-                .filter(profExperience -> profExperience.getEndDate() == null)
-                .findFirst().orElseThrow()
-                .getCompany();
-        OpenJob openJob = modelMapper.map(openJobDto, OpenJob.class);
-        openJob.setId(null);
-        openJob.setCompany(company);
-        openJob.setCreator(creator);
-        openJob.setApplicants(
-                openJobDto.getApplicantIds().stream()
-                        .map(applicantId -> {
-                            Alumni alumni = alumniRepo.findById(applicantId).orElseThrow();
-                            return modelMapper.map(alumni, Alumni.class);
-                        })
-                        .collect(Collectors.toList())
-        );
-        openJobRepository.save(openJob);
-        return populateAndReturnDto(openJob);
+//        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
+//        Company company = creator.getProfExperiences().stream()
+//                .filter(profExperience -> profExperience.getEndDate() == null)
+//                .findFirst().orElseThrow()
+//                .getCompany();
+//        OpenJob openJob = modelMapper.map(openJobDto, OpenJob.class);
+//        openJob.setId(null);
+//        openJob.setCompany(company);
+//        openJob.setCreator(creator);
+//        openJob.setApplicants(
+//                openJobDto.getApplicantIds().stream()
+//                        .map(applicantId -> {
+//                            Alumni alumni = alumniRepo.findById(applicantId).orElseThrow();
+//                            return modelMapper.map(alumni, Alumni.class);
+//                        })
+//                        .collect(Collectors.toList())
+//        );
+//        openJobRepository.save(openJob);
+//        return populateAndReturnDto(openJob);
+           return null;
     }
 
     @Override
@@ -85,25 +84,26 @@ public class OpenJobServiceImpl implements OpenJobService {
     @Transactional
     @Override
     public GetFullOpenJobDto updateById(Long id, PostFullOpenJobDto openJobDto) {
-        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
-        Company company = creator.getProfExperiences().stream()
-                .filter(profExperience -> profExperience.getEndDate() == null)
-                .findFirst().orElseThrow()
-                .getCompany();
-        OpenJob openJob;
-        openJob = modelMapper.map(openJobDto, OpenJob.class);
-        openJob.setCompany(company);
-        openJob.setCreator(creator);
-        openJob.setApplicants(
-                openJobDto.getApplicantIds().stream()
-                        .map(applicantId -> {
-                            Alumni alumni = alumniRepo.findById(applicantId).orElseThrow();
-                            return modelMapper.map(alumni, Alumni.class);
-                        })
-                        .collect(Collectors.toList())
-        );
-        openJobRepository.save(openJob);
-        return populateAndReturnDto(openJob);
+//        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
+//        Company company = creator.getProfExperiences().stream()
+//                .filter(profExperience -> profExperience.getEndDate() == null)
+//                .findFirst().orElseThrow()
+//                .getCompany();
+//        OpenJob openJob;
+//        openJob = modelMapper.map(openJobDto, OpenJob.class);
+//        openJob.setCompany(company);
+//        openJob.setCreator(creator);
+//        openJob.setApplicants(
+//                openJobDto.getApplicantIds().stream()
+//                        .map(applicantId -> {
+//                            Alumni alumni = alumniRepo.findById(applicantId).orElseThrow();
+//                            return modelMapper.map(alumni, Alumni.class);
+//                        })
+//                        .collect(Collectors.toList())
+//        );
+//        openJobRepository.save(openJob);
+//        return populateAndReturnDto(openJob);
+        return null;
     }
 
     @Transactional
@@ -120,11 +120,11 @@ public class OpenJobServiceImpl implements OpenJobService {
         obj.setCompanyIndustry(openJob.getCompany().getIndustry());
         obj.setState(openJob.getCompany().getAddress().getState());
         obj.setCity(openJob.getCompany().getAddress().getCity());
-        obj.setApplicants(
-                openJob.getApplicants().stream()
-                        .map(alumni -> modelMapper.map(alumni, GetFullOpenJobDto.InnerAlumniDto.class))
-                        .collect(Collectors.toList())
-        );
+//        obj.setApplicants(
+//                openJob.getApplicants().stream()
+//                        .map(alumni -> modelMapper.map(alumni, GetFullOpenJobDto.InnerAlumniDto.class))
+//                        .collect(Collectors.toList())
+//        );
         return obj;
     }
 }

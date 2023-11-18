@@ -19,18 +19,12 @@ public class OpenJob extends BaseClass {
     private LocalDateTime openDate;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "creator_id")
-    private Alumni creator;
+    private Long creator_id;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "OpenJob_Alumni_Applications",
-            joinColumns = @JoinColumn(name = "open_job_id"),
-            inverseJoinColumns = @JoinColumn(name = "alumni_id"))
-    private List<Alumni> applicants;
-    // Constructors can be omitted because Lombok generates them
+    @OneToMany(mappedBy = "openJob")
+    private List<Application> applications;
 }
