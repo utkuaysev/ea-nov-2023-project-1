@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  alumni-db:
+    image: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: alumni-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1
+
+  business-db:
+    image: mysql
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: business-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1
+
+  education-db:
+    image: mysql
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: education-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1
+
+  alumni-app:
+    image: user-image
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - alumni-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://alumni-db:3306/alumni-db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1
+
+  business-app:
+    image: business-image
+    restart: always
+    ports:
+      - "8081:8080"
+    depends_on:
+      - business-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://business-db:3306/business-db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1
+
+  education-app:
+    image: education-image
+    restart: always
+    ports:
+      - "8082:8080"
+    depends_on:
+      - education-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://education-db:3306/education-db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1

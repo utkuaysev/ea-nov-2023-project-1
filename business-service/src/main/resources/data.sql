@@ -24,7 +24,7 @@ VALUES
     (0, 2, 2, '2021-11-20', null),
     (0, 3, 2, '2021-11-20', null);
 
-INSERT INTO Address (id, street, city, state, zip, is_deleted)
+INSERT INTO address (id, street, city, state, zip, is_deleted)
 VALUES
     (1, '123 Main St', 'New York', 'NY', '10001', false),
     (2, '456 Elm St', 'Los Angeles', 'CA', '90001', false),
@@ -32,11 +32,11 @@ VALUES
     (4, '4 Oak St', 'Fairfield', 'IA', '60601', false);
 
 -- Update Company, University, and Alumni tables with the corresponding address
-UPDATE Company
+UPDATE company
 SET address_id = 1
 WHERE id = 1;
 
-UPDATE Company
+UPDATE company
 SET address_id = 4
 WHERE id = 2;
 

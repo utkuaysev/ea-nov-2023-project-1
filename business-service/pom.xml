@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.project</groupId>
-	<artifactId>businness</artifactId>
+	<artifactId>business</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>businness</name>
+	<name>business-service</name>
 	<description>Alumni Portal</description>
 	<properties>
 		<java.version>17</java.version>
