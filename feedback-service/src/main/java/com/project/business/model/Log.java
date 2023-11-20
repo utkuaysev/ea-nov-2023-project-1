@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
