@@ -8,9 +8,9 @@ import com.project.business.repository.RoleTypeRepository;
 import com.project.business.service.feign.BusinessServiceClient;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +21,8 @@ public class AlumniServiceImpl implements AlumniService {
     private final RoleTypeRepository roleTypeRepository;
     private final ModelMapper modelMapper;
     private final BusinessServiceClient businessServiceClient;
+    private final RabbitTemplate rabbitTemplate;
+
 
     @Override
     public List<GetFullAlumniDto> getAllAlumni() {
@@ -32,6 +34,7 @@ public class AlumniServiceImpl implements AlumniService {
 
     @Override
     public GetFullAlumniDto getAlumniById(long id) {
+        rabbitTemplate.convertAndSend("prof-experience-exchange", "add-prof-experience", "Testing");
         return mapGetResponse(alumniRepository.findById(id).orElseThrow());
     }
 
@@ -40,6 +43,7 @@ public class AlumniServiceImpl implements AlumniService {
         Alumni alumni = modelMapper.map(postFullAlumniDto, Alumni.class);
         alumni.setRole(roleTypeRepository.findById(postFullAlumniDto.getRoleId()).orElseThrow());
         var result = alumniRepository.save(alumni);
+        rabbitTemplate.convertAndSend("prof-experience-exchange", "add-prof-experience", "Testing");
         return modelMapper.map(result, GetFullAlumniDto.class);
     }
 

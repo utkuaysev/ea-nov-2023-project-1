@@ -1,6 +1,8 @@
 package com.project.business;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableRabbit
 @SpringBootApplication
 public class BusinessApplication {
 
@@ -24,6 +27,11 @@ public class BusinessApplication {
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
+	@RabbitListener(queues = {"q1"})
+	public void bindToHiQueue1(String payload) {
+		System.out.println(payload);
+	}
+
 
 
 }
