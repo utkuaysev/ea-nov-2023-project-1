@@ -12,6 +12,17 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: 1
 
+  event-db:
+    image: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root@1234
+      MYSQL_DATABASE: event_portal
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root@1234
+
   business-db:
     image: mysql
     restart: always
