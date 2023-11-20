@@ -21,6 +21,7 @@ VALUES
 INSERT INTO prof_experience (is_deleted, alumni_id, company_id, start_date, end_date)
 VALUES
     (0, 1, 1, '2022-01-15', '2023-03-30'),
+    (0, 1, 2, '2024-01-15', null),
     (0, 2, 2, '2021-11-20', null),
     (0, 3, 2, '2021-11-20', null);
 
@@ -51,7 +52,7 @@ ALTER TABLE open_job AUTO_INCREMENT = 3;
 ALTER TABLE application AUTO_INCREMENT = 3;
 
 -- Set auto-increment for prof_experience table
-ALTER TABLE prof_experience AUTO_INCREMENT = 4;
+ALTER TABLE prof_experience AUTO_INCREMENT = 5;
 
 -- Set auto-increment for Address table
 ALTER TABLE address AUTO_INCREMENT = 5;

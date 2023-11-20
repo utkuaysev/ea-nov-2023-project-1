@@ -14,8 +14,8 @@ public class RoleType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    @OneToMany(mappedBy = "role")
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     List<Alumni> alumni;
 }

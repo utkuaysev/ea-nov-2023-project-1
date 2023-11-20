@@ -1,80 +1,62 @@
 package com.project.business.service;
 
-import com.project.business.dto.get.GetFullProfExperienceDto;
+import com.project.business.dto.get.GetCompanyDto;
+import com.project.business.dto.get.GetProfExperienceDto;
 import com.project.business.dto.post.PostFullProfExperienceDto;
 import com.project.business.model.ProfExperience;
-import com.project.business.model.Company;
 import com.project.business.repository.ProfExperienceRepository;
-import com.project.business.repository.CompanyRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ProfExperienceServiceImpl implements ProfExperienceService {
     private final ProfExperienceRepository profExperienceRepository;
-    private final CompanyRepository companyRepo;
     private final ModelMapper modelMapper;
-
     @Override
-    public GetFullProfExperienceDto addProfExperience(Long alumniId, PostFullProfExperienceDto profExperienceDto) {
-        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
-                .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
-//        Alumni alumni = alumniRepository.findById(alumniId)
-//                .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + profExperienceDto.getCompanyId()));
-        ProfExperience profExperience = modelMapper.map(profExperienceDto, ProfExperience.class);
-        profExperience.setCompany(company);
-//        profExperience.setAlumni(alumni);
-        profExperienceRepository.save(profExperience);
-        return modelMapper.map(profExperience, GetFullProfExperienceDto.class);
-    }
-
-    @Override
-    public List<GetFullProfExperienceDto> getAllByAlumniId(Long alumniId) {
-//        return profExperienceRepository.findAllByAlumni_Id(alumniId).stream()
-//                .map(m -> modelMapper.map(m, GetFullProfExperienceDto.class))
-//                .collect(Collectors.toList());
+    public GetProfExperienceDto addProfExperience(PostFullProfExperienceDto profExperienceDto) {
+//        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
+//                .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
+//        GetFullAlumniDto alumni = getAlumni(profExperienceDto.getAlumniId());
+//        ProfExperience profExperience = mapResponse(profExperienceDto, alumni, modelMapper.map(company, GetFullCompanyDto.class));
+//        profExperienceRepository.save(profExperience);
+//        return modelMapper.map(profExperience, GetProfExperienceDto.class);
             return null;
     }
 
     @Override
-    public GetFullProfExperienceDto getByAlumniIdAndId(Long alumniId, Long id) {
-//        ProfExperience profExperience = profExperienceRepository.findByAlumni_IdAndId(alumniId, id).orElseThrow();
-//        return modelMapper.map(profExperience, GetFullProfExperienceDto.class);
-        return null;
+    public GetProfExperienceDto getById(Long id) {
+        var pe = profExperienceRepository.findById(id).orElseThrow();
+        return mapGetResponse(pe);
     }
 
-    @Transactional
     @Override
-    public GetFullProfExperienceDto updateById(Long alumniId, Long id, PostFullProfExperienceDto profExperienceDto) {
-        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
-                .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
-//        Alumni alumni = alumniRepository.findById(alumniId)
-//                .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + profExperienceDto.getCompanyId()));
-//        ProfExperience profExperience = profExperienceRepository.findByAlumni_IdAndId(alumniId, id).orElseThrow();
-
-//        profExperience.setCompany(company);
-//        profExperience.setAlumni(alumni);
-//        profExperience.setEndDate(profExperienceDto.getEndDate());
-//        profExperience.setStartDate(profExperienceDto.getStartDate());
-//        profExperienceRepository.save(profExperience);
-//        return modelMapper.map(profExperience, GetFullProfExperienceDto.class);
-        return null;
-
+    public List<GetProfExperienceDto> getByAlumniId(Long alumniId) {
+        var peList = profExperienceRepository.findAllByAlumniId(alumniId);
+        return peList.stream()
+                .map(pe -> mapGetResponse(pe))
+                .collect(Collectors.toList());
     }
 
-    @Transactional
     @Override
-    public GetFullProfExperienceDto deleteById(Long alumniId, Long id) {
-//        ProfExperience profExperience = profExperienceRepository.findByAlumni_IdAndId(alumniId, id).orElseThrow();
-//        GetFullProfExperienceDto retProfExperience = modelMapper.map(profExperience, GetFullProfExperienceDto.class);
-//        profExperienceRepository.delete(profExperience);
-//        return retProfExperience;
+    public GetProfExperienceDto updateById(Long alumniId, Long id, PostFullProfExperienceDto profExperienceDto) {
         return null;
-
     }
+
+    @Override
+    public GetProfExperienceDto deleteById(Long alumniId, Long id) {
+        return null;
+    }
+
+    private GetProfExperienceDto mapGetResponse(ProfExperience profExperience) {
+        var peDto = modelMapper.map(profExperience, GetProfExperienceDto.class);
+        var cDto = modelMapper.map(profExperience.getCompany(), GetCompanyDto.class);
+        peDto.setCompanyDto(cDto);
+        return peDto;
+    }
+
 }

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PostFullProfExperienceDto {
+    private Long alumniId;
     private Long companyId;
     private LocalDate startDate;
     private LocalDate endDate;

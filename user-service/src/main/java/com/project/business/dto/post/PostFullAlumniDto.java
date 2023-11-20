@@ -11,4 +11,5 @@ public class PostFullAlumniDto {
     private String phone;
     private String profilePicture;
     private String location;
+    private Long roleId;
 }

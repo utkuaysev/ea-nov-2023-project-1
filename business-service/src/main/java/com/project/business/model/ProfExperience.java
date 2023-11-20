@@ -13,7 +13,7 @@ public class ProfExperience extends TimeTrack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long alumni_id;
+    private Long alumniId;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
