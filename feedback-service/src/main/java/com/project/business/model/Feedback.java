@@ -12,12 +12,8 @@ public class Feedback extends BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String description;
+    private Long alumniId;
 
-    @ManyToOne
-    @JoinColumn(name = "alumni_id")
-    private Alumni alumni;
-
-    // Constructors can be omitted because Lombok generates them
+   
 }
