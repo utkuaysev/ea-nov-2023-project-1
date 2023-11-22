@@ -7,6 +7,8 @@ import com.project.event.model.id.AlumniEventId;
 import com.project.event.repository.AlumniEventRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +19,12 @@ import java.util.List;
 public class AlumniEventServiceImpl  implements AlumniEventService{
     private final AlumniEventRepository alumniEventRepository;
     private final ModelMapper modelMapper;
+    private final RabbitTemplate rabbitTemplate;
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
     @Override
     public List<GetFullAlumniEventDto> getAllAlumniEvents() {
@@ -53,6 +61,7 @@ public class AlumniEventServiceImpl  implements AlumniEventService{
     public void deleteAlumniEvent(long alumniId, long eventId) {
         var alumniEvent = alumniEventRepository.findById(new AlumniEventId(alumniId, eventId));
         alumniEventRepository.delete(alumniEvent);
+        rabbitTemplate.convertAndSend(exchange,routingKey,alumniEvent + "has been deleted");
     }
 
 }

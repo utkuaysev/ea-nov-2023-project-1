@@ -3,6 +3,7 @@ package com.project.event.model.id;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -12,13 +13,10 @@ import java.util.Objects;
 @Setter
 @Embeddable
 @AllArgsConstructor
+@NoArgsConstructor
 public class AlumniEventId implements Serializable {
     private Long alumniId;
     private Long eventId;
-
-    public AlumniEventId() {
-
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -4,6 +4,8 @@ import com.project.event.dto.get.GetFullAlumniEventDto;
 import com.project.event.dto.post.PostFullAlumniEventDto;
 import com.project.event.service.AlumniEventService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,13 @@ import java.util.List;
 public class AlumniEventController {
 
     private final AlumniEventService alumniEventService;
+    private final RabbitTemplate rabbitTemplate;
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
     @GetMapping
     public ResponseEntity<List<GetFullAlumniEventDto>> getAllAlumniEvents() {

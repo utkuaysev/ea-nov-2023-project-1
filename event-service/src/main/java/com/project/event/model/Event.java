@@ -25,5 +25,4 @@ public class Event extends TimeTrack {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<AlumniEvent> alumniEvents;
 
-    // Constructors can be omitted because Lombok generates them
 }
