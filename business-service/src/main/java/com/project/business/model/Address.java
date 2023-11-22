@@ -19,9 +19,5 @@ public class Address extends BaseClass {
     private String city;
     private String state;
     private String zip;
-
-    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
-    private Company company;
-
     // Constructors can be omitted because Lombok generates them
 }

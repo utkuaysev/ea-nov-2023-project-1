@@ -1,8 +1,8 @@
 package com.project.business.controller;
 
 import com.project.business.dto.get.GetProfExperienceDto;
-import com.project.business.dto.post.PostFullProfExperienceDto;
 import com.project.business.service.ProfExperienceService;
+import jakarta.ws.rs.NotAllowedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +18,6 @@ public class ProfExperienceController {
     private final ProfExperienceService profExperienceService;
 
 
-//    @PostMapping
-//    public GetProfExperienceDto addProfExperience(@RequestBody PostFullProfExperienceDto profExperience) {
-//        return profExperienceService.addProfExperience(profExperience);
-//    }
     @GetMapping("/{id}")
     public GetProfExperienceDto getProfExperienceById(@PathVariable Long id) {
         try {
@@ -39,25 +35,19 @@ public class ProfExperienceController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Prof experience not found");
         }
     }
-
-    @PutMapping("/{id}")
-    public GetProfExperienceDto updateById(@PathVariable Long alumniId,
-                                               @PathVariable Long id,
-                                              @RequestBody PostFullProfExperienceDto postFullProfExperienceDto) {
-        try {
-            return profExperienceService.updateById(alumniId, id, postFullProfExperienceDto);
-        } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ProfExperience not found");
-        }
-    }
-
     @DeleteMapping("/{id}")
-    public GetProfExperienceDto deleteById(@PathVariable Long alumniId, @PathVariable Long id) {
+    public void deleteById(@PathVariable Long id, @RequestHeader("mail") String mail) {
         try {
-            return profExperienceService.deleteById(alumniId, id);
+            profExperienceService.deleteById(id, mail);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ProfExperience not found");
+        } catch (NotAllowedException e) {
+            throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, e.getMessage());
         }
     }
 
+    @GetMapping("/searchByIndustry/{industry}")
+    public List<GetProfExperienceDto> searchByIndustry(@PathVariable String industry) {
+        return profExperienceService.searchByIndustry(industry);
+    }
 }

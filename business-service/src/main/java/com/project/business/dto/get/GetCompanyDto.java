@@ -7,4 +7,5 @@ public class GetCompanyDto {
     private String id;
     private String name;
     private String industry;
+    private GetAddressDto address;
 }

@@ -15,7 +15,7 @@ public class ProfExperience extends TimeTrack {
 
     private Long alumniId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
     // Constructors can be omitted because Lombok generates them
