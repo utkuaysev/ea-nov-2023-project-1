@@ -1,7 +1,7 @@
 package com.project.business.controller;
 
 import com.project.business.dto.get.GetProfExperienceDto;
-import com.project.business.dto.post.PostFullProfExperienceDto;
+import com.project.business.dto.post.PostProfExperienceDto;
 import com.project.business.service.ProfExperienceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class ProfExperienceController {
     @PutMapping("/{id}")
     public GetProfExperienceDto updateById(@PathVariable Long alumniId,
                                                @PathVariable Long id,
-                                              @RequestBody PostFullProfExperienceDto postFullProfExperienceDto) {
+                                              @RequestBody PostProfExperienceDto postFullProfExperienceDto) {
         try {
             return profExperienceService.updateById(alumniId, id, postFullProfExperienceDto);
         } catch (NoSuchElementException e) {

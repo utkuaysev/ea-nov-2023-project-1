@@ -24,7 +24,7 @@ public class Company extends BaseClass {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company")
     private List<ProfExperience> profExperiences;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)

@@ -1,7 +1,7 @@
 package com.project.business.controller;
 
 import com.project.business.dto.get.GetFullOpenJobDto;
-import com.project.business.dto.post.PostFullOpenJobDto;
+import com.project.business.dto.post.PostOpenJobDto;
 import com.project.business.service.OpenJobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class OpenJobController {
 
 
     @PostMapping
-    public GetFullOpenJobDto addOpenJob(@RequestBody PostFullOpenJobDto openJob) {
+    public GetFullOpenJobDto addOpenJob(@RequestBody PostOpenJobDto openJob) {
         return openJobService.addOpenJob(openJob);
     }
 
@@ -64,7 +64,7 @@ public class OpenJobController {
 
     @PutMapping("/{id}")
     public GetFullOpenJobDto updateById(@PathVariable Long id,
-                                              @RequestBody PostFullOpenJobDto postFullOpenJobDto) {
+                                              @RequestBody PostOpenJobDto postFullOpenJobDto) {
         try {
             return openJobService.updateById(id, postFullOpenJobDto);
         } catch (NoSuchElementException e) {

@@ -6,7 +6,7 @@ The Alumni Management System is a comprehensive web-based application designed t
 ####  Key Features
 --- 
 * User Registration and Authentication
-	* Alumni will be able to register on the platform using their email addresses. The system will ensure secure authentication and authorization for accessing different features based on user roles.
+	* Alumni will be able to register on the platform using their mail addresses. The system will ensure secure authentication and authorization for accessing different features based on user roles.
 * Alumni Profiles
 	* Each registered alumni will have a personalized profile page where they can update their contact information, educational details, professional achievements, and profile picture.
 *  Alumni Directory

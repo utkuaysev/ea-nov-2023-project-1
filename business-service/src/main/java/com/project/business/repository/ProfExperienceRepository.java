@@ -8,11 +8,14 @@ import java.util.List;
 
 @Repository
 public interface ProfExperienceRepository extends ListCrudRepository<ProfExperience, Long> {
-      List<ProfExperience> findAllByAlumniId(Long alumniId);
-//    Optional<ProfExperience> findByAlumni_IdAndId(Long alumniId, Long id);
+    List<ProfExperience> findAllByAlumniId(Long alumniId);
 
-    @Override
-    default void delete(ProfExperience profExperience) {
-        profExperience.setDeleted(true);
+    default void deleteAllByAlumniId(Long alumniIdLong){
+        findAllByAlumniId(alumniIdLong).forEach(pe -> softDelete(pe));
     }
+    default void softDelete(ProfExperience profExperience) {
+        profExperience.setDeleted(true);
+        save(profExperience);
+    }
+
 }

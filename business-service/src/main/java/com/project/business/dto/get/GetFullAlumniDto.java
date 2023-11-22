@@ -9,8 +9,6 @@ import java.util.List;
 @Setter
 public class GetFullAlumniDto {
 
-
-
     private Long id;
     private String mail;
     private String password;

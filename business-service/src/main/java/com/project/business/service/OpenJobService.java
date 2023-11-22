@@ -1,13 +1,13 @@
 package com.project.business.service;
 
 import com.project.business.dto.get.GetFullOpenJobDto;
-import com.project.business.dto.post.PostFullOpenJobDto;
+import com.project.business.dto.post.PostOpenJobDto;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
 
 public interface OpenJobService {
-    GetFullOpenJobDto addOpenJob(PostFullOpenJobDto openJob);
+    GetFullOpenJobDto addOpenJob(PostOpenJobDto openJob);
 
     List<GetFullOpenJobDto> getAll();
 
@@ -21,7 +21,7 @@ public interface OpenJobService {
 
 
     @Transactional
-    GetFullOpenJobDto updateById(Long id, PostFullOpenJobDto openJobDto);
+    GetFullOpenJobDto updateById(Long id, PostOpenJobDto openJobDto);
 
     @Transactional
     GetFullOpenJobDto deleteById(Long id);

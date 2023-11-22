@@ -1,7 +1,7 @@
 package com.project.business.service;
 
 import com.project.business.dto.get.GetFullOpenJobDto;
-import com.project.business.dto.post.PostFullOpenJobDto;
+import com.project.business.dto.post.PostOpenJobDto;
 import com.project.business.model.OpenJob;
 import com.project.business.repository.CompanyRepository;
 import com.project.business.repository.OpenJobRepository;
@@ -22,7 +22,7 @@ public class OpenJobServiceImpl implements OpenJobService {
     private final ModelMapper modelMapper;
 
     @Override
-    public GetFullOpenJobDto addOpenJob(PostFullOpenJobDto openJobDto) {
+    public GetFullOpenJobDto addOpenJob(PostOpenJobDto openJobDto) {
 //        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
 //        Company company = creator.getProfExperiences().stream()
 //                .filter(profExperience -> profExperience.getEndDate() == null)
@@ -82,7 +82,7 @@ public class OpenJobServiceImpl implements OpenJobService {
 
     @Transactional
     @Override
-    public GetFullOpenJobDto updateById(Long id, PostFullOpenJobDto openJobDto) {
+    public GetFullOpenJobDto updateById(Long id, PostOpenJobDto openJobDto) {
 //        Alumni creator = alumniRepo.findById(openJobDto.getCreatorAlumniId()).orElseThrow();
 //        Company company = creator.getProfExperiences().stream()
 //                .filter(profExperience -> profExperience.getEndDate() == null)

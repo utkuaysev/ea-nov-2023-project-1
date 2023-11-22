@@ -1,8 +1,11 @@
 package com.project.business.service;
 
+import com.project.business.dto.get.GetAddressDto;
 import com.project.business.dto.get.GetCompanyDto;
 import com.project.business.dto.get.GetProfExperienceDto;
-import com.project.business.dto.post.PostFullProfExperienceDto;
+import com.project.business.dto.post.PostProfExperienceDto;
+import com.project.business.model.Address;
+import com.project.business.model.Company;
 import com.project.business.model.ProfExperience;
 import com.project.business.repository.ProfExperienceRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +21,7 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
     private final ProfExperienceRepository profExperienceRepository;
     private final ModelMapper modelMapper;
     @Override
-    public GetProfExperienceDto addProfExperience(PostFullProfExperienceDto profExperienceDto) {
+    public GetProfExperienceDto addProfExperience(PostProfExperienceDto profExperienceDto) {
 //        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
 //                .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
 //        GetFullAlumniDto alumni = getAlumni(profExperienceDto.getAlumniId());
@@ -43,7 +46,7 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
     }
 
     @Override
-    public GetProfExperienceDto updateById(Long alumniId, Long id, PostFullProfExperienceDto profExperienceDto) {
+    public GetProfExperienceDto updateById(Long alumniId, Long id, PostProfExperienceDto profExperienceDto) {
         return null;
     }
 
@@ -52,11 +55,22 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
         return null;
     }
 
-    private GetProfExperienceDto mapGetResponse(ProfExperience profExperience) {
+    public GetProfExperienceDto mapGetResponse(ProfExperience profExperience) {
         var peDto = modelMapper.map(profExperience, GetProfExperienceDto.class);
         var cDto = modelMapper.map(profExperience.getCompany(), GetCompanyDto.class);
-        peDto.setCompanyDto(cDto);
+        var aDto = modelMapper.map(profExperience.getCompany().getAddress(), GetAddressDto.class);
+        cDto.setAddress(aDto);
+        peDto.setCompany(cDto);
         return peDto;
+    }
+
+    public ProfExperience mapProfExperience(PostProfExperienceDto profExperienceDto) {
+        var pe = modelMapper.map(profExperienceDto, ProfExperience.class);
+        var c = modelMapper.map(profExperienceDto.getCompany(), Company.class);
+        var a = modelMapper.map(profExperienceDto.getCompany().getAddress(), Address.class);
+        c.setAddress(a);
+        pe.setCompany(c);
+        return pe;
     }
 
 }

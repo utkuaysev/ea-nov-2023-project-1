@@ -11,7 +11,12 @@ import java.util.List;
 public class PostFullEduExperienceDto {
     private Long universityId;
     private String degree;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate startDate;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate endDate;
+
     private List<Long> courseIdList;
 }
