@@ -19,20 +19,9 @@ import org.springframework.stereotype.Service;
 public class RabbitListenerService {
     private final ModelMapper modelMapper;
     private final ProfExperienceRepository profExperienceRepository;
-    private final CompanyRepository companyRepository;
-    private final AddressRepository addressRepository;
 
-    @RabbitListener(queues = {"q1"})
-    public void createProfExperience(@Payload String jsonProfExperience) {
-        try {
-            var data = modelMapper.map(new ObjectMapper().readValue(jsonProfExperience, PostProfExperienceDto.class), ProfExperience.class);
-            profExperienceRepository.save(data);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @RabbitListener(queues = {"q2"})
-    public void updateProfExperience(@Payload String jsonProfExperience) {
+    public void createOrUpdateProfExperience(@Payload String jsonProfExperience) {
         try {
             var data = modelMapper.map(new ObjectMapper().readValue(jsonProfExperience, PutProfExperienceDto.class), ProfExperience.class);
             profExperienceRepository.save(data);
@@ -42,7 +31,7 @@ public class RabbitListenerService {
     }
     @RabbitListener(queues = {"q3"})
     public void deleteProfExperience(@Payload String alumniId) {
-        var alumniIdLong= Long.parseLong(alumniId);
+        var alumniIdLong = Long.parseLong(alumniId);
         profExperienceRepository.deleteAllByAlumniId(alumniIdLong);
     }
 }

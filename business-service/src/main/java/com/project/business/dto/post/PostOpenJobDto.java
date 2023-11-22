@@ -12,6 +12,6 @@ import java.util.List;
 public class PostOpenJobDto implements Serializable {
     private String description;
     private LocalDateTime openDate;
-    private Long creatorAlumniId;
+    private Long companyId;
     private List<Long> applicantIds;
 }

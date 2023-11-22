@@ -1,9 +1,11 @@
 package com.project.user.controller;
 
+import com.project.user.aop.annotation.AdminAuthorization;
+import com.project.user.aop.annotation.CombinedAuthorization;
+import com.project.user.dto.get.GetAllAlumniDto;
 import com.project.user.dto.get.GetAlumniAuth;
 import com.project.user.dto.get.GetFullAlumniDto;
 import com.project.user.dto.post.AuthRequest;
-import com.project.user.dto.post.PostFullAlumniDto;
 import com.project.user.dto.put.PutFullAlumniDto;
 import com.project.user.service.AlumniService;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,11 @@ public class AlumniController {
     private final AlumniService alumniService;
 
     @GetMapping
-    public List<GetFullAlumniDto> getAllAlumni() {
+    public List<GetAllAlumniDto> getAllAlumni() {
         return alumniService.getAllAlumni();
     }
 
+    @CombinedAuthorization
     @GetMapping("/{id}")
     public GetFullAlumniDto getAlumniById(@PathVariable long id) {
         return alumniService.getAlumniById(id);
@@ -40,18 +43,30 @@ public class AlumniController {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
+    @CombinedAuthorization
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAlumni(@PathVariable long id, @RequestBody PutFullAlumniDto putFullAlumniDto) {
-        alumniService.updateAlumni(id, putFullAlumniDto);
+    public ResponseEntity<String> updateAlumni(@PathVariable long id
+            , @RequestBody PutFullAlumniDto putFullAlumniDto
+            , @RequestHeader("mail") String mail) {
+        alumniService.updateAlumni(id, putFullAlumniDto, mail);
         return new ResponseEntity<>("Alumni updated successfully", HttpStatus.OK);
     }
 
+    @CombinedAuthorization
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAlumni(@PathVariable long id) {
         alumniService.deleteAlumni(id);
         return new ResponseEntity<>("Alumni deleted successfully", HttpStatus.OK);
     }
-//    @GetMapping("/graduationYear/{year}")
+
+    @AdminAuthorization
+    @PutMapping("/{id}")
+    public ResponseEntity<String> activateAlumni(@PathVariable long id) {
+        alumniService.activateAlumni(id);
+        return new ResponseEntity<>("Alumni activated successfully", HttpStatus.OK);
+    }
+
+    //    @GetMapping("/graduationYear/{year}")
 //    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
 //        return alumniService.getAlumniByGraduationYear(year);
 //    }
@@ -60,6 +75,13 @@ public class AlumniController {
 //    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
 //        return alumniService.getAlumniByCourseName(courseName);
 //    }
+    @GetMapping("/location/{location}")
+    public List<GetFullAlumniDto> getAlumniByLocation(@PathVariable String location) {
+        return alumniService.getAllAlumniByLocation(location);
+    }
 
-
+    @GetMapping("/industry/{industry}")
+    public List<GetFullAlumniDto> getAlumniByIndustry(@PathVariable String industry) {
+        return alumniService.getAlumniByIndustry(industry);
+    }
 }

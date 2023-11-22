@@ -8,6 +8,8 @@ import com.project.business.model.Address;
 import com.project.business.model.Company;
 import com.project.business.model.ProfExperience;
 import com.project.business.repository.ProfExperienceRepository;
+import com.project.business.service.feign.UserServiceClient;
+import jakarta.ws.rs.NotAllowedException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class ProfExperienceServiceImpl implements ProfExperienceService {
     private final ProfExperienceRepository profExperienceRepository;
     private final ModelMapper modelMapper;
+    private final UserServiceClient userServiceClient;
     @Override
     public GetProfExperienceDto addProfExperience(PostProfExperienceDto profExperienceDto) {
 //        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
@@ -41,18 +44,20 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
     public List<GetProfExperienceDto> getByAlumniId(Long alumniId) {
         var peList = profExperienceRepository.findAllByAlumniId(alumniId);
         return peList.stream()
-                .map(pe -> mapGetResponse(pe))
+                .map(this::mapGetResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public GetProfExperienceDto updateById(Long alumniId, Long id, PostProfExperienceDto profExperienceDto) {
-        return null;
-    }
-
-    @Override
-    public GetProfExperienceDto deleteById(Long alumniId, Long id) {
-        return null;
+    public void deleteById(Long id, String mail) {
+        var user = userServiceClient.getUser(mail);
+        var pe = profExperienceRepository.findById(id).orElseThrow();
+        if(user.getRoleName() == "ADMIN" || user.getId().equals(pe.getAlumniId())){
+            profExperienceRepository.delete(pe);
+        }
+        else{
+            throw new NotAllowedException("This op is not allowed");
+        }
     }
 
     public GetProfExperienceDto mapGetResponse(ProfExperience profExperience) {
@@ -71,6 +76,14 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
         c.setAddress(a);
         pe.setCompany(c);
         return pe;
+    }
+
+    @Override
+    public List<GetProfExperienceDto> searchByIndustry(String industry) {
+        var data = profExperienceRepository.findAllByEndDateIsNullAndCompany_Industry(industry);
+        return data.stream()
+                .map(this::mapGetResponse)
+                .collect(Collectors.toList());
     }
 
 }

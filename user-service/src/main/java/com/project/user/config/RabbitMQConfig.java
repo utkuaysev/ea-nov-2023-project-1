@@ -23,10 +23,6 @@ public class RabbitMQConfig {
         return new FanoutExchange("delete-alumni-exchange");
     }
 
-    @Bean
-    public Queue directQ1() {
-        return new Queue("q1", true);
-    }
 
     @Bean
     public Queue directQ2() {
@@ -37,14 +33,10 @@ public class RabbitMQConfig {
     public Queue fanoutQ3() {return new Queue("q3", true);
     }
 
-    @Bean
-    Binding directQ1Binding(Queue directQ1, DirectExchange directExchange) {
-        return BindingBuilder.bind(directQ1).to(directExchange).with("add-prof-experience");
-    }
 
     @Bean
     Binding directQ2Binding(Queue directQ2, DirectExchange directExchange) {
-        return BindingBuilder.bind(directQ2).to(directExchange).with("update-prof-experience");
+        return BindingBuilder.bind(directQ2).to(directExchange).with("create-update-prof-experience");
     }
 
     @Bean

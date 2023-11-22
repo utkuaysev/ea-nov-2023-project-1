@@ -15,8 +15,8 @@ public interface AlumniRepository extends ListCrudRepository<Alumni,Long> {
     default void delete(Alumni alumni) {
         alumni.setDeleted(true);
     }
-
     Optional<Alumni> findAlumniByMail(String mail);
+    Optional<Alumni> findAlumniByLocation(String location);
 
 }
 

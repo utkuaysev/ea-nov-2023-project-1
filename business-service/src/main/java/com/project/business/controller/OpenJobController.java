@@ -1,5 +1,7 @@
 package com.project.business.controller;
 
+import com.project.business.dto.get.GetAlumniDto;
+import com.project.business.dto.get.GetFullAlumniDto;
 import com.project.business.dto.get.GetFullOpenJobDto;
 import com.project.business.dto.post.PostOpenJobDto;
 import com.project.business.service.OpenJobService;
@@ -19,19 +21,28 @@ public class OpenJobController {
 
 
     @PostMapping
-    public GetFullOpenJobDto addOpenJob(@RequestBody PostOpenJobDto openJob) {
-        return openJobService.addOpenJob(openJob);
+    public GetFullOpenJobDto addOpenJob(@RequestBody PostOpenJobDto openJobDto, @RequestHeader("mail") String mail) {
+        return openJobService.addOpenJob(openJobDto, mail);
     }
 
     @GetMapping
     public List<GetFullOpenJobDto> getAllOpenJobs() {
-            return openJobService.getAll();
+        return openJobService.getAll();
     }
 
     @GetMapping("/{id}")
     public GetFullOpenJobDto getOpenJobById(@PathVariable Long id) {
         try {
             return openJobService.getById(id);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
+        }
+    }
+
+    @GetMapping("/{id}/applicants")
+    public List<GetAlumniDto> getApplicants(@PathVariable Long id, @RequestHeader("mail") String mail) {
+        try {
+            return openJobService.getApplicants(id, mail);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
         }
@@ -45,6 +56,7 @@ public class OpenJobController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
         }
     }
+
     @GetMapping("/searchByCity")
     public List<GetFullOpenJobDto> searchByCity(@RequestParam String city) {
         try {
@@ -53,6 +65,7 @@ public class OpenJobController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
         }
     }
+
     @GetMapping("/searchByCompanyName")
     public List<GetFullOpenJobDto> searchByCompanyName(@RequestParam String companyName) {
         try {
@@ -64,9 +77,10 @@ public class OpenJobController {
 
     @PutMapping("/{id}")
     public GetFullOpenJobDto updateById(@PathVariable Long id,
-                                              @RequestBody PostOpenJobDto postFullOpenJobDto) {
+                                        @RequestBody PostOpenJobDto postFullOpenJobDto,
+                                        @RequestHeader("mail") String mail) {
         try {
-            return openJobService.updateById(id, postFullOpenJobDto);
+            return openJobService.updateById(id, postFullOpenJobDto, mail);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Open Job not found");
         }

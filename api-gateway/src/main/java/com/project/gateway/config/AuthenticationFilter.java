@@ -66,7 +66,7 @@ public class AuthenticationFilter implements GatewayFilter {
     private void updateRequest(ServerWebExchange exchange, String token) {
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
         exchange.getRequest().mutate()
-                .header("email", String.valueOf(claims.get("email")))
+                .header("mail", String.valueOf(claims.get("mail")))
                 .build();
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    @Around("within(com.project.business.controller..*)")
+    @Around("within(com.project.user.controller..*)")
   public Object logger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime=System.currentTimeMillis();
         String operation=proceedingJoinPoint.getSignature().getName();

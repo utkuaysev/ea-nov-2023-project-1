@@ -16,4 +16,6 @@ public interface BusinessServiceClient {
     GetProfExperienceDto getProfExperience(@PathVariable("id") Long id);
     @RequestMapping(method = RequestMethod.GET, value = "/prof_experiences/alumni/{alumniId}")
     List<GetProfExperienceDto> getProfExperiencesByAlumniId(@PathVariable Long alumniId);
+    @RequestMapping(method = RequestMethod.GET, value = "/prof_experiences/searchByIndustry/{industry}")
+    List<GetProfExperienceDto> getProfExperiencesByIndustry(@PathVariable String industry);
 }

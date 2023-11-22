@@ -12,16 +12,15 @@ public interface ProfExperienceService {
 
 
     GetProfExperienceDto getById(Long id);
+
     List<GetProfExperienceDto> getByAlumniId(Long alumniId);
 
 
-    @Transactional
-    GetProfExperienceDto updateById(Long alumniId, Long id, PostProfExperienceDto profExperienceDto);
-
-    @Transactional
-    GetProfExperienceDto deleteById(Long alumniId,Long id);
+    void deleteById(Long id, String mail);
 
     GetProfExperienceDto mapGetResponse(ProfExperience profExperience);
+
     ProfExperience mapProfExperience(PostProfExperienceDto profExperienceDto);
 
+    List<GetProfExperienceDto> searchByIndustry(String industry);
 }

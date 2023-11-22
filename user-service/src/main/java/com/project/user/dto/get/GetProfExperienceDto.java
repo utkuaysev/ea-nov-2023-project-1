@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Data
 public class GetProfExperienceDto {
     private String id;
+    private Long alumniId;
     private GetCompanyDto company;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

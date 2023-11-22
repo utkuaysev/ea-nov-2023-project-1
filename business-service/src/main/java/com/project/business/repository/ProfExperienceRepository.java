@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ProfExperienceRepository extends ListCrudRepository<ProfExperience, Long> {
     List<ProfExperience> findAllByAlumniId(Long alumniId);
-
+    List<ProfExperience> findAllByEndDateIsNullAndCompany_Industry(String industry);
     default void deleteAllByAlumniId(Long alumniIdLong){
         findAllByAlumniId(alumniIdLong).forEach(pe -> softDelete(pe));
     }
