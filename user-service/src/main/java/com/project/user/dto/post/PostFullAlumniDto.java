@@ -15,5 +15,4 @@ public class PostFullAlumniDto implements Serializable {
     private String profilePicture;
     private String location;
     private Long roleId;
-    private List<PostProfExperienceDto> profExperiences;
 }

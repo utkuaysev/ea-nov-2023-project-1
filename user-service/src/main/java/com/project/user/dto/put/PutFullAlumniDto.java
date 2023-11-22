@@ -16,4 +16,5 @@ public class PutFullAlumniDto {
     private String location;
     private Long roleId;
     private List<PutProfExperienceDto> profExperiences;
+    private List<EduExperienceDto> eduExperiences;
 }

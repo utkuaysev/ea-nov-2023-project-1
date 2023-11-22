@@ -2,11 +2,8 @@ package com.project.business.service.rabbit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.business.dto.post.PostProfExperienceDto;
 import com.project.business.dto.put.PutProfExperienceDto;
 import com.project.business.model.ProfExperience;
-import com.project.business.repository.AddressRepository;
-import com.project.business.repository.CompanyRepository;
 import com.project.business.repository.ProfExperienceRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
