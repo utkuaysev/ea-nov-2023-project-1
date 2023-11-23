@@ -1,15 +1,10 @@
 package com.project.education.service;
 
-import com.project.education.dto.post.PostFullEduExperienceDto;
-import com.project.education.dto.get.GetFullEduExperienceDto;
 import com.project.education.dto.get.GetFullCourseDto;
-import com.project.business.model.*;
-import com.project.education.repository.CourseRepository;
+import com.project.education.dto.get.GetFullEduExperienceDto;
+import com.project.education.dto.put.PutFullEduExperienceDto;
 import com.project.education.repository.EduExperienceRepository;
-import com.project.education.repository.UniversityRepository;
-import com.project.education.model.Course;
 import com.project.education.model.EduExperience;
-import com.project.education.model.University;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,78 +13,48 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EduExperienceServiceImpl implements EduExperienceService {
     private final EduExperienceRepository eduExperienceRepository;
-    private final UniversityRepository universityRepository;
-    private final CourseRepository courseRepository;
     private final ModelMapper modelMapper;
 
+
     @Override
-    public GetFullEduExperienceDto addEduExperience(Long alumniId, PostFullEduExperienceDto eduExperienceDto) {
-        University university = universityRepository.findById(eduExperienceDto.getUniversityId())
-                .orElseThrow(() -> new RuntimeException("University not found with id: " + eduExperienceDto.getUniversityId()));
-//        Alumni alumni = alumniRepository.findById(alumniId)
-//                .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + eduExperienceDto.getUniversityId()));
-        List<Course> courseList = new ArrayList<>();
-        eduExperienceDto.getCourseIdList().forEach(courseId -> {
-            Course course = courseRepository.findById(courseId).orElseThrow();
-            if (course.getUniversity().getId() != university.getId()) {
-                throw new NoSuchElementException("Course not found with id:" + courseId);
-            }
-            courseList.add(course);
-        });
-        EduExperience eduExperience = modelMapper.map(eduExperienceDto, EduExperience.class);
-        eduExperience.setUniversity(university);
-        eduExperience.setCourses(courseList);
-//        eduExperience.setAlumni(alumni);
-        eduExperienceRepository.save(eduExperience);
-        return populateCoursesAndReturnDto(eduExperience);
+    public List<GetFullEduExperienceDto> getAllByAlumniId(Long alumniId) {
+        List<EduExperience> eduExperiences = eduExperienceRepository.findAllByAlumniId(alumniId);
+        return eduExperiences.stream()
+                .map(this::populateCoursesAndReturnDto)
+                .collect(Collectors.toList());
     }
 
-//    @Override
-//    public GetFullEduExperienceDto getByAlumniId(Long alumniId) {
-//        EduExperience eduExperience = eduExperienceRepository.findByAlumni_Id(alumniId).orElseThrow();
-//        return populateCoursesAndReturnDto(eduExperience);
-//    }
-
-    @Transactional
     @Override
-    public GetFullEduExperienceDto updateById(Long alumniId, PostFullEduExperienceDto eduExperienceDto) {
-        University university = universityRepository.findById(eduExperienceDto.getUniversityId())
-                .orElseThrow(() -> new RuntimeException("University not found with id: " + eduExperienceDto.getUniversityId()));
-//        Alumni alumni = alumniRepository.findById(alumniId)
-//                .orElseThrow(() -> new RuntimeException("Alumni not found with id: " + eduExperienceDto.getUniversityId()));
-        List<Course> courseList = new ArrayList<>();
-        eduExperienceDto.getCourseIdList().forEach(courseId -> {
-            Course course = courseRepository.findById(courseId).orElseThrow();
-            if (course.getUniversity().getId() != university.getId()) {
-                throw new NoSuchElementException("Course not found with id:" + courseId);
-            }
-            courseList.add(course);
-        });
-//        EduExperience eduExperience = eduExperienceRepository.findByAlumni_Id(alumniId).orElseThrow();
-//        eduExperience.setUniversity(university);
-//        eduExperience.setCourses(courseList);
-////        eduExperience.setAlumni(alumni);
-//        eduExperience.setDegree(eduExperienceDto.getDegree());
-//        eduExperience.setEndDate(eduExperienceDto.getEndDate());
-//        eduExperience.setStartDate(eduExperienceDto.getStartDate());
-//        eduExperienceRepository.save(eduExperience);
-//        return populateCoursesAndReturnDto(eduExperience);
-        return null;
+    public List<GetFullEduExperienceDto> getAllByGradYear(int year) {
+        List<EduExperience> eduExperiences = eduExperienceRepository.findAllByEndDate_Year(year);
+        return eduExperiences.stream()
+                .map(this::populateCoursesAndReturnDto)
+                .collect(Collectors.toList());
     }
 
+    @Override
+    public List<GetFullEduExperienceDto> getAllByCourseName(String course) {
+        List<EduExperience> eduExperiences = eduExperienceRepository.findByCourseName(course);
+        return eduExperiences.stream()
+                .map(this::populateCoursesAndReturnDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GetFullEduExperienceDto getById(Long id) {
+            var pe = eduExperienceRepository.findById(id).orElseThrow();
+            return populateCoursesAndReturnDto(pe);
+        }
     @Transactional
     @Override
-    public GetFullEduExperienceDto deleteById(Long alumniId) {
-//        EduExperience eduExperience = eduExperienceRepository.findByAlumni_Id(alumniId).orElseThrow();
-//        GetFullEduExperienceDto retEduExperience = populateCoursesAndReturnDto(eduExperience);
-//        eduExperienceRepository.delete(eduExperience);
-//        return retEduExperience;
-        return null;
+    public void deleteById(Long id) {
+        eduExperienceRepository.deleteById(id);
 
     }
     private GetFullEduExperienceDto populateCoursesAndReturnDto(EduExperience eduExperience){

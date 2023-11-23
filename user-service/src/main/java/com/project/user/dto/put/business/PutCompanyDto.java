@@ -1,4 +1,4 @@
-package com.project.user.dto.put;
+package com.project.user.dto.put.business;
 
 import lombok.Data;
 

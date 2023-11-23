@@ -1,9 +1,10 @@
-package com.project.education.dto.get;
+package com.project.user.dto.put.education;
 
 import lombok.Data;
 
 @Data
-public class GetFullCourseDto {
+public class PutCourseDto {
     private Long id;
     private String name;
+
 }

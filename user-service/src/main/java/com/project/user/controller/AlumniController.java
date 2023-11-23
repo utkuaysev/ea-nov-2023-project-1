@@ -60,21 +60,22 @@ public class AlumniController {
     }
 
     @AdminAuthorization
-    @PutMapping("/{id}")
+    @PutMapping("/activate/{id}")
     public ResponseEntity<String> activateAlumni(@PathVariable long id) {
         alumniService.activateAlumni(id);
         return new ResponseEntity<>("Alumni activated successfully", HttpStatus.OK);
     }
 
-    //    @GetMapping("/graduationYear/{year}")
-//    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
-//        return alumniService.getAlumniByGraduationYear(year);
-//    }
-//
-//    @GetMapping("/courseName/{courseName}")
-//    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
-//        return alumniService.getAlumniByCourseName(courseName);
-//    }
+    @GetMapping("/graduationYear/{year}")
+    public List<GetFullAlumniDto> getAlumniByGraduationYear(@PathVariable int year) {
+        return alumniService.getAlumniByGraduationYear(year);
+    }
+
+    @GetMapping("/course/{course}")
+    public List<GetFullAlumniDto> getAlumniByCourseName(@PathVariable String courseName) {
+        return alumniService.getAlumniByCourseName(courseName);
+    }
+
     @GetMapping("/location/{location}")
     public List<GetFullAlumniDto> getAlumniByLocation(@PathVariable String location) {
         return alumniService.getAllAlumniByLocation(location);

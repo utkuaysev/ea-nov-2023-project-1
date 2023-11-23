@@ -16,4 +16,5 @@ public class GetFullAlumniDto {
     private String location;
     private String roleName;
     private List<GetProfExperienceDto> profExperiences;
+    private List<GetFullEduExperienceDto> eduExperiences;
 }

@@ -9,6 +9,7 @@ import com.project.user.model.Alumni;
 import com.project.user.repository.AlumniRepository;
 import com.project.user.repository.RoleTypeRepository;
 import com.project.user.service.feign.BusinessServiceClient;
+import com.project.user.service.feign.EducationServiceClient;
 import jakarta.ws.rs.NotAllowedException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,7 @@ public class AlumniServiceImpl implements AlumniService {
     private final RoleTypeRepository roleTypeRepository;
     private final ModelMapper modelMapper;
     private final BusinessServiceClient businessServiceClient;
+    private final EducationServiceClient educationServiceClient;
     private final RabbitTemplate rabbitTemplate;
 
 
@@ -42,7 +44,7 @@ public class AlumniServiceImpl implements AlumniService {
     @Override
     public GetFullAlumniDto getAlumniById(long id) {
         try {
-            return mapGetResponse(alumniRepository.findById(id).orElseThrow(), false, true);
+            return mapGetResponse(alumniRepository.findById(id).orElseThrow(), false, true, true);
         } catch (NoSuchElementException e) {
             return null;
         }
@@ -91,6 +93,7 @@ public class AlumniServiceImpl implements AlumniService {
             rabbitTemplate.convertAndSend("direct-prof-experience-exchange",
                     "create-update-prof-experience", pe);
         });
+
     }
 
     @Override
@@ -109,7 +112,7 @@ public class AlumniServiceImpl implements AlumniService {
     @Override
     public List<GetFullAlumniDto> getAllAlumniByLocation(String location) {
         return alumniRepository.findAlumniByLocation(location).stream()
-                .map(alumni -> mapGetResponse(alumni, true, true))
+                .map(alumni -> mapGetResponse(alumni, true, true, true))
                 .collect(Collectors.toList());
     }
 
@@ -119,20 +122,57 @@ public class AlumniServiceImpl implements AlumniService {
         return peList.stream()
                 .map(pe -> {
                     var alumni = alumniRepository.findById(pe.getAlumniId()).orElseThrow();
-                    var alumniDto =  mapGetResponse(alumni, true, false);
+                    var alumniDto =  mapGetResponse(alumni, true, false, false);
                     alumniDto.setProfExperiences(Collections.singletonList(pe));
                     return alumniDto;
                 })
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<GetFullAlumniDto> getAlumniByGraduationYear(int year) {
+        var eduExperiences = educationServiceClient.getEduExperiencesByGradYear(year);
+        return eduExperiences.stream()
+                .map(eduExperience -> {
+                    var alumni = alumniRepository.findById(eduExperience.getAlumniId());
+                    if(alumni.isPresent()){
+                        var res =  mapGetResponse(alumni.get(), true, false, false);
+                        res.setEduExperiences(Collections.singletonList(eduExperience));
+                        return res;
+                    }
+                    return null;
+                })
+                .collect(Collectors.toList());
+    }
 
-    private GetFullAlumniDto mapGetResponse(Alumni alumni, boolean maskPassword, boolean setPe) {
+    @Override
+    public List<GetFullAlumniDto> getAlumniByCourseName(String courseName) {
+        var eduExperiences = educationServiceClient.getEduExperiencesByCourse(courseName);
+        return eduExperiences.stream()
+                .map(eduExperience -> {
+                    var alumni = alumniRepository.findById(eduExperience.getAlumniId());
+                    if(alumni.isPresent()){
+                        var res =  mapGetResponse(alumni.get(), true, false, false);
+                        res.setEduExperiences(Collections.singletonList(eduExperience));
+                        return res;
+                    }
+                    return null;
+                })
+                .collect(Collectors.toList());
+
+    }
+
+
+    private GetFullAlumniDto mapGetResponse(Alumni alumni, boolean maskPassword, boolean setPe, boolean setEe) {
         var alumniDto = modelMapper.map(alumni, GetFullAlumniDto.class);
         alumniDto.setRoleName(alumni.getRole().getName());
         if (setPe) {
             var peList = businessServiceClient.getProfExperiencesByAlumniId(alumni.getId());
             alumniDto.setProfExperiences(peList);
+        }
+        if (setEe) {
+            var eeList = educationServiceClient.getEduExperiencesByAlumniId(alumni.getId());
+            alumniDto.setEduExperiences(eeList);
         }
         if (maskPassword)
             alumniDto.setPassword(null);

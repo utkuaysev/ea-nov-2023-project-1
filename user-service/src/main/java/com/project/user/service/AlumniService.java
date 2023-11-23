@@ -25,6 +25,10 @@ public interface AlumniService {
 
     List<GetFullAlumniDto> getAlumniByIndustry(String industry);
 
+    List<GetFullAlumniDto> getAlumniByGraduationYear(int year);
+
+    List<GetFullAlumniDto> getAlumniByCourseName(String courseName);
+
 
 //    GetFullAlumniDto getAlumniByMail(String mail);
 }

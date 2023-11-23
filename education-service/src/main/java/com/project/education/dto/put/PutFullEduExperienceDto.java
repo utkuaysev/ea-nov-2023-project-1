@@ -1,4 +1,4 @@
-package com.project.education.dto.post;
+package com.project.education.dto.put;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostFullEduExperienceDto {
-    private Long universityId;
-    private String degree;
+public class PutFullEduExperienceDto {
+    private long id;
+    private String university;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate startDate;
@@ -22,5 +22,5 @@ public class PostFullEduExperienceDto {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate endDate;
 
-    private List<Long> courseIdList;
+    private List<PutFullCourseDto> courses;
 }

@@ -12,17 +12,6 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: 1
 
-  event-db:
-    image: mysql
-    restart: always
-    ports:
-      - "3307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root@1234
-      MYSQL_DATABASE: event_portal
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: root@1234
-
   business-db:
     image: mysql
     restart: always
@@ -46,37 +35,79 @@ services:
       MYSQL_PASSWORD: 1
 
   alumni-app:
-    image: user-image
+    image: alumni-app
     restart: always
     ports:
       - "8080:8080"
     depends_on:
       - alumni-db
+      - config-app
+      - discovery-app
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://alumni-db:3306/alumni-db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1
 
   business-app:
-    image: business-image
+    image: business-app
     restart: always
     ports:
       - "8081:8080"
     depends_on:
       - business-db
+      - config-app
+      - discovery-app
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://business-db:3306/business-db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1
 
   education-app:
-    image: education-image
+    image: education-app
     restart: always
     ports:
-      - "8082:8080"
+      - "8083:8080"
     depends_on:
       - education-db
+      - config-app
+      - discovery-app
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://education-db:3306/education-db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1
+
+  config-app:
+    image: config-app
+    restart: always
+    ports:
+      - "9876:9876"
+    depends_on:
+      - discovery-app
+
+  discovery-app:
+    image: discovery-app
+    restart: always
+    ports:
+      - "8761:8761"
+
+  auth-app:
+    image: auth-app
+    restart: always
+    ports:
+      - "9004:8080"
+
+  gateway-app:
+    image: gateway-app
+    restart: always
+    ports:
+      - "9090:8080"
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always

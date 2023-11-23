@@ -8,9 +8,6 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 
 public interface ProfExperienceService {
-    GetProfExperienceDto addProfExperience(PostProfExperienceDto profExperience);
-
-
     GetProfExperienceDto getById(Long id);
 
     List<GetProfExperienceDto> getByAlumniId(Long alumniId);
@@ -20,7 +17,6 @@ public interface ProfExperienceService {
 
     GetProfExperienceDto mapGetResponse(ProfExperience profExperience);
 
-    ProfExperience mapProfExperience(PostProfExperienceDto profExperienceDto);
 
     List<GetProfExperienceDto> searchByIndustry(String industry);
 }

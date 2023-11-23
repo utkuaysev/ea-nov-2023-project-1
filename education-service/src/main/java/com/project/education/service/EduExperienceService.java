@@ -1,19 +1,21 @@
 package com.project.education.service;
 
-import com.project.education.dto.post.PostFullEduExperienceDto;
 import com.project.education.dto.get.GetFullEduExperienceDto;
+import com.project.education.dto.put.PutFullEduExperienceDto;
 import jakarta.transaction.Transactional;
+
+import java.util.List;
 
 public interface EduExperienceService {
 
-//    GetFullEduExperienceDto getByAlumniId(Long alumniId);
-
-
-    @Transactional
-    GetFullEduExperienceDto updateById(Long alumniId, PostFullEduExperienceDto eduExperienceDto);
+    GetFullEduExperienceDto getById(Long id);
 
     @Transactional
-    GetFullEduExperienceDto deleteById(Long alumniId);
+    void deleteById(Long alumniId);
 
-    GetFullEduExperienceDto addEduExperience(Long alumniId, PostFullEduExperienceDto eduExperience);
+    List<GetFullEduExperienceDto> getAllByAlumniId(Long alumniId);
+
+    List<GetFullEduExperienceDto> getAllByGradYear(int year);
+
+    List<GetFullEduExperienceDto> getAllByCourseName(String course);
 }

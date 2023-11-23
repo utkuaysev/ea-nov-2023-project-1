@@ -18,20 +18,11 @@ public class EduExperience extends TimeTrack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String degree;
-
     private Long alumniId;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "university_id")
-    private University university;
+    private String university;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "EduExperience_Course",
-            joinColumns = { @JoinColumn(name = "edu_experience_id") },
-            inverseJoinColumns = { @JoinColumn(name = "course_id") }
-    )
+    @OneToMany(mappedBy = "eduExperience", cascade = CascadeType.ALL)
     private List<Course> courses;
     // Constructors can be omitted because Lombok generates them
 }

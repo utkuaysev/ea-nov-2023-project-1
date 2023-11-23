@@ -23,16 +23,6 @@ public class ProfExperienceServiceImpl implements ProfExperienceService {
     private final ProfExperienceRepository profExperienceRepository;
     private final ModelMapper modelMapper;
     private final UserServiceClient userServiceClient;
-    @Override
-    public GetProfExperienceDto addProfExperience(PostProfExperienceDto profExperienceDto) {
-//        Company company = companyRepo.findById(profExperienceDto.getCompanyId())
-//                .orElseThrow(() -> new RuntimeException("Company not found with id: " + profExperienceDto.getCompanyId()));
-//        GetFullAlumniDto alumni = getAlumni(profExperienceDto.getAlumniId());
-//        ProfExperience profExperience = mapResponse(profExperienceDto, alumni, modelMapper.map(company, GetFullCompanyDto.class));
-//        profExperienceRepository.save(profExperience);
-//        return modelMapper.map(profExperience, GetProfExperienceDto.class);
-            return null;
-    }
 
     @Override
     public GetProfExperienceDto getById(Long id) {

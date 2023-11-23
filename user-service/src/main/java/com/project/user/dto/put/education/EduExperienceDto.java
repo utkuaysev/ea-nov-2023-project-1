@@ -1,19 +1,17 @@
-package com.project.education.dto.get;
+package com.project.user.dto.put.education;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
-public class GetFullEduExperienceDto {
-    private Long id;
+@Data
+public class EduExperienceDto {
+    private String id;
     private String university;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -21,6 +19,7 @@ public class GetFullEduExperienceDto {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate endDate;
+    private Long alumniId;
+    private List<PutCourseDto> courses;
 
-    private List<GetFullCourseDto> courseList;
 }

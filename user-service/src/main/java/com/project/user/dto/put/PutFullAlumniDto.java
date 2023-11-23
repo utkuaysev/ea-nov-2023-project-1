@@ -1,5 +1,7 @@
 package com.project.user.dto.put;
 
+import com.project.user.dto.put.business.PutProfExperienceDto;
+import com.project.user.dto.put.education.EduExperienceDto;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,7 +2,7 @@ FROM openjdk:17-alpine
 
 WORKDIR /home/app
 
-COPY target/education-0.0.1-SNAPSHOT.jar .
+COPY ./target/education-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
 

@@ -1,4 +1,4 @@
-package com.project.education.dto.get;
+package com.project.user.dto.get;
 
 import lombok.Data;
 
