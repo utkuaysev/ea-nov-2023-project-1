@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "57e7db67-8097-4dca-a52b-995f51edc4e6",
+		"name": "project-final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3658032"
+	},
+	"item": [
+		{
+			"name": "gateway",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"example@emails.com\",\r\n  \"password\": \"secretpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"example@emails.com\",\r\n  \"password\": \"secretpassword\",\r\n  \"roleId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AllAlumni",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoxLCJzdWIiOiJleGFtcGxlQGVtYWlscy5jb20iLCJpYXQiOjE3MDA2MjY0MjksImV4cCI6MTcwMDcxMjgyOX0.bVPhlwLeGSHCL7WfSzUQKsokvV12rBsLQVUVQ4Jx7GvrTpNJVTnRdNe093A3UbsSZTEI-w1s17VhZjc1Koj_SA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:9090/alumni",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"alumni"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put alumni",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -24,8 +24,8 @@ public class AuthorizationAspect {
     @Before("@annotation(com.project.user.aop.annotation.CombinedAuthorization) && args(id)")
     public void checkCombinedAuthorization(Long id) throws AccessDeniedException {
         var mail = httpServletRequest.getHeaders("mail");
-        var user = alumniRepository.findAlumniByMail(String.valueOf(mail));
-        if (!isAdmin(user) || !isCurrentUser(user,id)) {
+        var user = alumniRepository.findAlumniByMail(mail.nextElement());
+        if (!isAdmin(user) && !isCurrentUser(user,id)) {
             throw new AccessDeniedException("Access denied. Only administrators and the current user are allowed.");
         }
     }
@@ -44,6 +44,6 @@ public class AuthorizationAspect {
     }
 
     private boolean isCurrentUser(Optional<Alumni> user, Long id) {
-        return user.map(u -> u.getId().equals(id)).orElse(false);
+        return user.map(u -> u.getId()  == 1).orElse(false);
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 public class GetFullEduExperienceDto {
     private Long id;
+    private Long alumniId;
     private String university;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

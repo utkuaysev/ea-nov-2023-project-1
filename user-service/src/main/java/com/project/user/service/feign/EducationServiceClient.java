@@ -19,5 +19,5 @@ public interface EducationServiceClient {
     @RequestMapping(method = RequestMethod.GET, value = "/edu_experiences/searchByCourse/{course}")
     List<GetFullEduExperienceDto> getEduExperiencesByCourse(@PathVariable String course);
     @RequestMapping(method = RequestMethod.GET, value = "/edu_experiences/alumni/{alumniId}")
-    List<GetFullEduExperienceDto> getEduExperiencesByAlumniId(Long id);
+    List<GetFullEduExperienceDto> getEduExperiencesByAlumniId(@PathVariable Long alumniId);
 }

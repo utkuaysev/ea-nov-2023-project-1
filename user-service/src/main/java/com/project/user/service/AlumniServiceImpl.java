@@ -85,15 +85,26 @@ public class AlumniServiceImpl implements AlumniService {
         }
         Alumni alumni = modelMapper.map(putFullAlumniDto, Alumni.class);
         alumni.setId(id);
+        alumni.setMail(mail);
         alumni.setRole(roleTypeRepository.findById(putFullAlumniDto.getRoleId()).orElseThrow());
+        alumni.setPassword(currentAlumni.getPassword());
         var result = alumniRepository.save(alumni);
         var profExpDtos = putFullAlumniDto.getProfExperiences();
-        profExpDtos.forEach(pe -> {
-            pe.setAlumniId(result.getId());
-            rabbitTemplate.convertAndSend("direct-prof-experience-exchange",
-                    "create-update-prof-experience", pe);
-        });
-
+        if(profExpDtos!= null) {
+            profExpDtos.forEach(pe -> {
+                pe.setAlumniId(result.getId());
+                rabbitTemplate.convertAndSend("direct-prof-experience-exchange",
+                        "create-update-prof-experience", pe);
+            });
+        }
+        var eduExpDtos = putFullAlumniDto.getEduExperiences();
+        if(eduExpDtos!= null) {
+            eduExpDtos.forEach(ee -> {
+                ee.setAlumniId(result.getId());
+                rabbitTemplate.convertAndSend("direct-edu-experience-exchange",
+                        "create-update-edu-experience", ee);
+            });
+        }
     }
 
     @Override

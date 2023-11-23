@@ -32,6 +32,10 @@ public class GatewayConfig {
                 .route("business-service", r -> r.path("/open_jobs/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://business-service"))
+                .route("education-service", r -> r.path("/edu_experiences/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://education-service"))
+
                 .build();
     }
 
